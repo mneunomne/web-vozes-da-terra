@@ -1,3 +1,4 @@
+require('dotenv').config()
 const path = require('path')
 const webpack = require('webpack')
 
@@ -7,6 +8,7 @@ const WebpackNotifierPlugin = require('webpack-notifier')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const webpackDevServerPort = parseInt(process.env.PORT || '3000', 10)
 const production = process.env.NODE_ENV === 'production'
 
 module.exports = {
@@ -122,7 +124,14 @@ module.exports = {
     new FriendlyErrorsWebpackPlugin(),
     new WebpackNotifierPlugin()
   ],
-  devtool: production ? 'source-map' : 'cheap-module-eval-source-map'
+  devtool: production ? 'source-map' : 'cheap-module-eval-source-map',
+  devServer: {
+    historyApiFallback: true,
+    noInfo: true,
+    compress: true,
+    quiet: true,
+    port: webpackDevServerPort
+  }
 }
 
 let plugins = []
@@ -170,13 +179,7 @@ if (production) {
     })
   ]
 } else {
-  module.exports.entry.app.push(
-    'webpack-hot-middleware/client?noInfo=true&reload=true'
-  )
-
   plugins = [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
