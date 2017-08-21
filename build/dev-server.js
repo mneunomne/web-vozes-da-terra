@@ -1,5 +1,6 @@
 require('dotenv').config()
 
+const opn = require('opn')
 const express = require('express')
 const webpack = require('webpack')
 const webpackConfig = require('../webpack.config')
@@ -19,14 +20,15 @@ const hotMiddleware = require('webpack-hot-middleware')(compiler, {
   heartbeat: 2000
 })
 
-compiler.plugin('compilation', (compilation) => {
-  compilation.plugin('html-webpack-plugin-after-emit', (data, cb) => {
-    hotMiddleware.publish({action: 'reload'})
-    cb()
-  })
-})
-
 app.use(devMiddleware)
 app.use(hotMiddleware)
+
+const uri = `http://localhost:${port}`
+
+console.log('> Starting dev server...')
+devMiddleware.waitUntilValid(() => {
+  console.log('> Listening at ' + uri + '\n')
+  opn(uri)
+})
 
 app.listen(port)

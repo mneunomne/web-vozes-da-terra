@@ -39,6 +39,7 @@
     "img-loader": "^2.0.0",
     "jquery": "^3.2.1",
     "node-sass": "^4.5.3",
+    "opn": "^5.1.0",
     "popper.js": "^1.12.3",
     "postcss-loader": "^2.0.6",
     "resolve-url-loader": "^2.1.0",
