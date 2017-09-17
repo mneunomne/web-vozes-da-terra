@@ -5,8 +5,8 @@
 ## Quick start
 
 ```shell
-yarn
-yarn dev
+npm i
+npm run dev
 ```
 
 Just as easy !
@@ -17,10 +17,10 @@ Default port is configurable by `.env` file settings (just copy `.env.example`).
 
 ### Commands
 
-* `yarn dev`
+* `npm run dev`
 Start Webpack assets compilation and express server with hot reloading support.
 
-* `yarn build`
+* `npm run build`
 Compile all JS application into redistributable static files into `dist` folder.
 
 ## License
