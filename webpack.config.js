@@ -5,18 +5,13 @@ const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const webpackDevServerPort = parseInt(process.env.PORT || '3000', 10)
 const production = process.env.NODE_ENV === 'production'
 
 module.exports = {
-  entry: {
-    app: [
-      './src/main.js'
-    ]
-  },
+  entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: production ? 'js/[name].[chunkhash].js' : 'js/[name].js',
@@ -138,7 +133,6 @@ let plugins = []
 
 if (production) {
   plugins = [
-    new CleanWebpackPlugin(['dist']),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production')

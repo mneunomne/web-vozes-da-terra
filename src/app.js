@@ -13,9 +13,7 @@ new Vue({
   el: '#app',
   router,
   render: h => h(App)
-})
-
-window.swal = sweetalert2;
+});
 
 (function ($) {
   $('.slider').not('.slick-initialized').removeAttr('hidden').slick({
@@ -26,8 +24,8 @@ window.swal = sweetalert2;
     slidesToScroll: 1
   })
 
-  $('button.sweet').click(() => {
-    window.swal({
+  $('.sweet').click(() => {
+    sweetalert2({
       title: 'Yo!',
       text: 'Yeaaah!',
       type: 'success',
