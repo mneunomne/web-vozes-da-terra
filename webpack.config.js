@@ -3,7 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
+const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -14,7 +14,7 @@ module.exports = {
   entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: production ? 'js/[name].[chunkhash].js' : 'js/[name].js',
+    filename: production ? '[name].[chunkhash].js' : '[name].js',
     publicPath: '/'
   },
   module: {
@@ -116,7 +116,7 @@ module.exports = {
       allChunks: true,
       disable: !production
     }),
-    new FriendlyErrorsWebpackPlugin(),
+    new FriendlyErrorsPlugin(),
     new WebpackNotifierPlugin()
   ],
   devtool: production ? 'source-map' : 'cheap-module-eval-source-map',
@@ -144,6 +144,7 @@ if (production) {
         warnings: false
       }
     }),
+    new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, 'dist/index.html'),
       template: 'index.html',
@@ -174,13 +175,11 @@ if (production) {
   ]
 } else {
   plugins = [
-    // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
       inject: true
-    }),
-    new FriendlyErrorsWebpackPlugin()
+    })
   ]
 }
 
