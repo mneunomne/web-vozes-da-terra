@@ -44,12 +44,23 @@
 </template>
 
 <script>
+  import 'slick-carousel'
+  
   export default {
     name: 'app',
     data: () => {
       return {
         message: null
       }
+    },
+    mounted () {
+      $('.slider').not('.slick-initialized').removeAttr('hidden').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 3,
+        slidesToScroll: 1
+      })
     }
   }
 </script>

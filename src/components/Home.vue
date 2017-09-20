@@ -15,7 +15,19 @@
 </template>
 
 <script>
+  import sweetalert2 from 'sweetalert2'
+
   export default {
-    name: 'home'
+    name: 'home',
+    mounted () {
+      $('button.sweet').click(() => {
+        sweetalert2({
+          title: 'Yo!',
+          text: 'Yeaaah!',
+          type: 'success',
+          confirmButtonText: 'Cool'
+        })
+      })
+    }
   }
 </script>
