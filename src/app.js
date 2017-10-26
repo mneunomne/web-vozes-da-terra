@@ -1,5 +1,4 @@
 import './sass/app.scss'
-import 'bootstrap'
 
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
