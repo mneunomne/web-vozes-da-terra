@@ -36,8 +36,6 @@
 </template>
 
 <script>
-  import 'slick-carousel'
-  
   export default {
     name: 'app',
     data: () => {
