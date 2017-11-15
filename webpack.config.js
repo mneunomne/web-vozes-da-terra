@@ -118,7 +118,15 @@ module.exports = {
       disable: !production
     }),
     new FriendlyErrorsPlugin(),
-    new WebpackNotifierPlugin()
+    new WebpackNotifierPlugin(),
+    new HtmlWebpackPlugin({
+      template: 'index.html',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      }
+    })
   ],
   resolve: {
     extensions: ['.js', '.vue', '.json'],
@@ -152,17 +160,6 @@ if (production) {
       }
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new HtmlWebpackPlugin({
-      filename: path.resolve(__dirname, 'dist/index.html'),
-      template: 'index.html',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-      },
-      chunksSortMode: 'dependency'
-    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module, count) {
@@ -178,14 +175,6 @@ if (production) {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor']
-    })
-  ]
-} else {
-  plugins = [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html',
-      inject: true
     })
   ]
 }
