@@ -2,7 +2,7 @@ import './sass/app.scss'
 import './load-client-scripts'
 
 import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
+import BootstrapVue from 'bootstrap-vue'
 
 import App from './App.vue'
 
