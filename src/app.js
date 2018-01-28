@@ -2,7 +2,7 @@ import './sass/app.scss'
 import './load-client-scripts'
 
 import Vue from 'vue'
-import BootstrapVue from 'bootstrap-vue'
+import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 
 import App from './App.vue'
 
@@ -18,7 +18,7 @@ export function createApp () {
   const app = new Vue({
     router,
     store,
-    render: h => h(App)
+    render: (h) => h(App)
   })
 
   return { app, router, store }

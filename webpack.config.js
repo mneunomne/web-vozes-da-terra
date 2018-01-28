@@ -29,8 +29,7 @@ module.exports = {
               loader: 'css-loader',
               options: {
                 minimize: production,
-                sourceMap: true,
-                importLoaders: 1
+                sourceMap: true
               }
             }, {
               loader: 'postcss-loader',
@@ -42,11 +41,10 @@ module.exports = {
                 ]
               }
             }, {
-              loader: 'resolve-url-loader?sourceMap'
+              loader: 'resolve-url-loader'
             }, {
               loader: 'sass-loader',
               options: {
-                precision: 8,
                 outputStyle: 'expanded',
                 sourceMap: true
               }
