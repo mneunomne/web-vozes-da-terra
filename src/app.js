@@ -2,6 +2,7 @@ import './sass/app.scss'
 import './load-client-scripts'
 
 import Vue from 'vue'
+import 'babel-polyfill'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 
 import App from './App.vue'
