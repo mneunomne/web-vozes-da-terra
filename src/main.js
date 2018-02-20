@@ -1,11 +1,11 @@
-import './sass/app.scss'
+import './scss/app.scss'
 import './load-client-scripts'
 
 import Vue from 'vue'
 import 'babel-polyfill'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
 
-import App from './App.vue'
+import App from './App'
 
 import { createRouter } from './router'
 import { createStore } from './store'
