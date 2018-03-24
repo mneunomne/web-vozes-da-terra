@@ -2,7 +2,6 @@ require('dotenv').config()
 const path = require('path')
 const webpack = require('webpack')
 
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
@@ -31,15 +30,18 @@ module.exports = {
                 minimize: production,
                 sourceMap: true
               }
-            }, {
+            },
+            {
               loader: 'postcss-loader',
               options: {
                 ident: 'postcss',
                 sourceMap: true
               }
-            }, {
+            },
+            {
               loader: 'resolve-url-loader'
-            }, {
+            },
+            {
               loader: 'sass-loader',
               options: {
                 outputStyle: 'expanded',
@@ -69,7 +71,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/,
-        loaders: [
+        use: [
           {
             loader: 'file-loader',
             options: {
@@ -93,12 +95,17 @@ module.exports = {
       }
     ]
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'initial'
+    }
+  },
   plugins: [
     new webpack.ProvidePlugin({
       $: 'jquery'
     }),
     new ExtractTextPlugin({
-      filename: 'css/[name].[contenthash].css',
+      filename: '[name].[contenthash].css',
       allChunks: true,
       disable: !production
     }),
@@ -129,39 +136,3 @@ module.exports = {
     port: webpackDevServerPort
   }
 }
-
-let plugins = []
-
-if (production) {
-  plugins = [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      }
-    }),
-    new UglifyJsPlugin({
-      parallel: true,
-      sourceMap: true
-    }),
-    new webpack.HashedModuleIdsPlugin(),
-    new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      minChunks: function (module, count) {
-        return (
-          module.resource &&
-          /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, './node_modules')
-          ) === 0
-        )
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'manifest',
-      chunks: ['vendor']
-    })
-  ]
-}
-
-module.exports.plugins.push(...plugins)
