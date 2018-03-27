@@ -2,8 +2,7 @@ require('dotenv').config()
 const path = require('path')
 const webpack = require('webpack')
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -21,35 +20,33 @@ module.exports = {
     rules: [
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: production,
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                ident: 'postcss',
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'resolve-url-loader'
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                outputStyle: 'expanded',
-                sourceMap: true
-              }
+        use: [
+          production ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              minimize: production,
+              sourceMap: true
             }
-          ]
-        })
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              ident: 'postcss',
+              sourceMap: true
+            }
+          },
+          {
+            loader: 'resolve-url-loader'
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              outputStyle: 'expanded',
+              sourceMap: true
+            }
+          }
+        ]
       },
       {
         test: /\.(js|vue)$/,
@@ -104,12 +101,9 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery'
     }),
-    new ExtractTextPlugin({
-      filename: '[name].[contenthash].css',
-      allChunks: true,
-      disable: !production
+    new MiniCssExtractPlugin({
+      filename: production ? '[name].[chunkhash].css' : '[name].css'
     }),
-    new FriendlyErrorsPlugin(),
     new WebpackNotifierPlugin(),
     new HtmlWebpackPlugin({
       template: 'index.html',
