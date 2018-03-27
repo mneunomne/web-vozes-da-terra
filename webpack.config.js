@@ -102,7 +102,7 @@ module.exports = {
       $: 'jquery'
     }),
     new MiniCssExtractPlugin({
-      filename: production ? '[name].[chunkhash].css' : '[name].css'
+      filename: '[name].[chunkhash].css'
     }),
     new WebpackNotifierPlugin(),
     new HtmlWebpackPlugin({
