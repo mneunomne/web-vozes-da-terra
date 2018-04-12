@@ -1,6 +1,6 @@
 # Vue Boilerplate
 
-> Vue Bootstrap 4 (beta) boilerplate with basic home-about-contact pages vue components handled by vue router, useful for pure showcase/prototype sites only.
+> Vue Bootstrap 4 boilerplate with basic home-about-contact pages vue components handled by vue router, useful for pure showcase/prototype sites only.
 
 ## Quick start
 
