@@ -2,6 +2,7 @@ require('dotenv').config()
 const path = require('path')
 const webpack = require('webpack')
 
+const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
@@ -102,6 +103,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       $: 'jquery'
     }),
+    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash].css'
     }),
