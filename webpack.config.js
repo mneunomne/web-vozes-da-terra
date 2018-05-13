@@ -12,7 +12,7 @@ const webpackDevServerPort = parseInt(process.env.PORT || '3000', 10)
 const production = process.env.NODE_ENV === 'production'
 
 let cssLoaders = [
-  production ? MiniCssExtractPlugin.loader : 'style-loader',
+  production ? MiniCssExtractPlugin.loader : 'vue-style-loader',
   {
     loader: 'css-loader',
     options: {
