@@ -11,6 +11,24 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpackDevServerPort = parseInt(process.env.PORT || '3000', 10)
 const production = process.env.NODE_ENV === 'production'
 
+let cssLoaders = [
+  production ? MiniCssExtractPlugin.loader : 'style-loader',
+  {
+    loader: 'css-loader',
+    options: {
+      minimize: production,
+      sourceMap: true
+    }
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      ident: 'postcss',
+      sourceMap: true
+    }
+  }
+]
+
 module.exports = {
   entry: './src/main.js',
   output: {
@@ -21,23 +39,12 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: cssLoaders
+      },
+      {
         test: /\.scss$/,
-        use: [
-          production ? MiniCssExtractPlugin.loader : 'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              minimize: production,
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              sourceMap: true
-            }
-          },
+        use: cssLoaders.concat([
           {
             loader: 'resolve-url-loader'
           },
@@ -48,7 +55,7 @@ module.exports = {
               sourceMap: true
             }
           }
-        ]
+        ])
       },
       {
         test: /\.(js|vue)$/,
