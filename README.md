@@ -23,6 +23,9 @@ Start Webpack assets compilation and express server with hot reloading support.
 * `yarn build`
 Compile all JS application into redistributable static files into `dist` folder.
 
+* `yarn preprender`
+Compile all JS application into redistributable static files and preprender each VueJS routes to dedicated HTML files into `dist` folder.
+
 ## License
 
 This project is open-sourced software licensed under the [MIT license](https://adr1enbe4udou1n.mit-license.org).

@@ -7,9 +7,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const PrerenderSPAPlugin = require('prerender-spa-plugin')
+const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 
 const webpackDevServerPort = parseInt(process.env.PORT || '3000', 10)
-const production = process.env.NODE_ENV === 'production'
+const prerender = process.env.NODE_ENV === 'prerender'
+const production = process.env.NODE_ENV === 'production' || prerender
 
 let cssLoaders = [
   production ? MiniCssExtractPlugin.loader : 'vue-style-loader',
@@ -139,4 +142,17 @@ module.exports = {
     quiet: true,
     port: webpackDevServerPort
   }
+}
+
+if (prerender) {
+  module.exports.plugins.push(
+    new PrerenderSPAPlugin({
+      staticDir: path.resolve(__dirname, 'dist'),
+      routes: ['/', '/about', '/contact'],
+
+      renderer: new Renderer({
+        headless: false
+      })
+    })
+  )
 }
