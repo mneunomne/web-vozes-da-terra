@@ -4,8 +4,7 @@ module.exports = {
     parser: 'babel-eslint',
   },
   env: {
-    browser: true,
-    jquery: true
+    browser: true
   },
   extends: [
     'plugin:vue/recommended',

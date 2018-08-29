@@ -6,6 +6,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
@@ -27,7 +28,10 @@ let cssLoaders = [
     loader: 'postcss-loader',
     options: {
       ident: 'postcss',
-      sourceMap: true
+      sourceMap: true,
+      plugins: [
+        require('autoprefixer')()
+      ]
     }
   }
 ]
@@ -72,7 +76,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+        }
       },
       {
         test: /\.html$/,
@@ -82,24 +89,20 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
-              name: 'images/[name].[ext]?[hash]'
-            }
-          },
-          {
-            loader: 'img-loader',
-            options: {
-              enabled: production
+              name: 'images/[name].[ext]?[hash]',
+              limit: 4096
             }
           }
         ]
       },
       {
         test: /\.(woff2?|ttf|eot|svg|otf)$/,
-        loader: 'file-loader',
+        loader: 'url-loader',
         options: {
-          name: 'fonts/[name].[ext]?[hash]'
+          name: 'fonts/[name].[ext]?[hash]',
+          limit: 4096
         }
       }
     ]
@@ -110,9 +113,7 @@ module.exports = {
     }
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery'
-    }),
+    new webpack.EnvironmentPlugin(['APP_LOCALE']),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash].css'
@@ -131,6 +132,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
+      'sweetalert2$': 'sweetalert2/dist/sweetalert2.js',
       '@': path.join(__dirname, 'src')
     }
   },
@@ -142,6 +144,12 @@ module.exports = {
     quiet: true,
     port: webpackDevServerPort
   }
+}
+
+if (production) {
+  module.exports.plugins.push(
+    new BundleAnalyzerPlugin()
+  )
 }
 
 if (prerender) {
