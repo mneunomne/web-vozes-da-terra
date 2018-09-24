@@ -15,6 +15,14 @@ const webpackDevServerPort = parseInt(process.env.PORT || '3000', 10)
 const prerender = process.env.NODE_ENV === 'prerender'
 const production = process.env.NODE_ENV === 'production' || prerender
 
+let postcssPlugins = [
+  require('autoprefixer')()
+]
+
+if (production) {
+  postcssPlugins.push(require('cssnano')())
+}
+
 let cssLoaders = [
   production ? MiniCssExtractPlugin.loader : 'vue-style-loader',
   {
@@ -29,9 +37,7 @@ let cssLoaders = [
     options: {
       ident: 'postcss',
       sourceMap: true,
-      plugins: [
-        require('autoprefixer')()
-      ]
+      plugins: postcssPlugins
     }
   }
 ]
