@@ -53,9 +53,6 @@ module.exports = {
         test: /\.scss$/,
         use: cssLoaders.concat([
           {
-            loader: 'resolve-url-loader'
-          },
-          {
             loader: 'sass-loader',
             options: {
               outputStyle: 'expanded',
