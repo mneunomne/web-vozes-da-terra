@@ -14,7 +14,7 @@ import { createRouter } from './router'
 import { createStore } from './store'
 import { createI18n } from './i18n'
 
-export function createApp () {
+export function createApp() {
   const router = createRouter()
   const store = createStore()
   const i18n = createI18n()
@@ -23,7 +23,7 @@ export function createApp () {
     router,
     store,
     i18n,
-    render: (h) => h(App)
+    render: h => h(App)
   })
 
   return { app, router, store }

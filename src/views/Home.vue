@@ -9,11 +9,30 @@
     <h4>Bootstrap</h4>
     <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
 
-    <b-btn class="mr-1" @click="openSwal">Sweet !</b-btn>
-    <b-btn class="mr-1" variant="success" @click="showSuccessMsg()">Noty !</b-btn>
-    <b-btn class="mr-1" variant="info" @click="showInfoMsg()">Noty !</b-btn>
-    <b-btn class="mr-1" variant="warning" @click="showWarnMsg()">Noty !</b-btn>
-    <b-btn class="mr-1" variant="danger" @click="showErrorMsg()">Noty !</b-btn>
+    <b-btn 
+      class="mr-1" 
+      @click="openSwal"
+    >Sweet !</b-btn>
+    <b-btn 
+      class="mr-1" 
+      variant="success" 
+      @click="showSuccessMsg()"
+    >Noty !</b-btn>
+    <b-btn 
+      class="mr-1" 
+      variant="info" 
+      @click="showInfoMsg()"
+    >Noty !</b-btn>
+    <b-btn 
+      class="mr-1" 
+      variant="warning" 
+      @click="showWarnMsg()"
+    >Noty !</b-btn>
+    <b-btn 
+      class="mr-1" 
+      variant="danger" 
+      @click="showErrorMsg()"
+    >Noty !</b-btn>
   </div>
 </template>
 
@@ -27,7 +46,7 @@ export default {
     showSuccessMsg: {
       type: VueNotifications.types.success,
       title: 'Hello there',
-      message: 'That\'s the success!'
+      message: "That's the success!"
     },
     showInfoMsg: {
       type: VueNotifications.types.info,
@@ -37,16 +56,16 @@ export default {
     showWarnMsg: {
       type: VueNotifications.types.warn,
       title: 'Wow, man',
-      message: 'That\'s the kind of warning'
+      message: "That's the kind of warning"
     },
     showErrorMsg: {
       type: VueNotifications.types.error,
       title: 'Wow-wow',
-      message: 'That\'s the error'
+      message: "That's the error"
     }
   },
   methods: {
-    openSwal () {
+    openSwal() {
       swal({
         title: 'Yo!',
         text: 'Yeaaah!',

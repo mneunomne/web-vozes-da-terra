@@ -7,7 +7,7 @@ import Contact from '@/views/Contact'
 
 Vue.use(Router)
 
-export function createRouter () {
+export function createRouter() {
   return new Router({
     linkActiveClass: 'open active',
     mode: 'history',

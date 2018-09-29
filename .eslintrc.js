@@ -1,21 +1,22 @@
 module.exports = {
   root: true,
-  parserOptions: {
-    parser: 'babel-eslint',
-  },
   env: {
     browser: true
   },
+  parserOptions: {
+    parser: 'babel-eslint',
+  },
   extends: [
     'plugin:vue/recommended',
-    'standard'
+    'plugin:prettier/recommended'
   ],
   plugins: [
-    'vue'
+    'vue',
+    'prettier'
   ],
   rules: {
-    'arrow-parens': 'error',
     'generator-star-spacing': 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'prefer-arrow-callback': 'error',
     'vue/max-attributes-per-line': 'off',
