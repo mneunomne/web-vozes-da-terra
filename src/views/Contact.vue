@@ -18,7 +18,7 @@
           type="email" 
           required
           placeholder="Enter email"
-        ></b-form-input>
+        />
       </b-form-group>
       <b-form-group 
         id="exampleInputGroup2"
@@ -31,7 +31,7 @@
           type="text" 
           required
           placeholder="Enter name"
-        ></b-form-input>
+        />
       </b-form-group>
       <b-form-group 
         id="exampleInputGroup3"
@@ -43,7 +43,7 @@
           v-model="form.food" 
           :options="foods"
           required
-        ></b-form-select>
+        />
       </b-form-group>
       <b-form-group id="exampleGroup4">
         <b-form-checkbox 

@@ -15,20 +15,7 @@ module.exports = {
     'prettier'
   ],
   rules: {
-    'generator-star-spacing': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'prefer-arrow-callback': 'error',
-    'vue/max-attributes-per-line': 'off',
-    'vue/attributes-order': 'off',
-    'vue/html-self-closing': ['error', {
-      html: {
-        void: 'never',
-        normal: 'never',
-        component: 'never'
-      },
-      svg: 'never',
-      math: 'never'
-    }]
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
 }
