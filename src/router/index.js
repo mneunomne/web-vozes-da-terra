@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home'
 import About from '@/views/About'
 import Contact from '@/views/Contact'
+import Audios from '@/views/Audios'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export function createRouter() {
         path: '/about',
         name: 'about',
         component: About
+      },
+      {
+        path: '/audios',
+        name: 'audios',
+        component: Audios
       },
       {
         path: '/contact',

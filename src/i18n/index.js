@@ -3,16 +3,16 @@ import VueI18n from 'vue-i18n'
 
 // Locales
 import en from './en'
-import fr from './fr'
+import pt from './pt'
 
 Vue.use(VueI18n)
 
 export function createI18n() {
   return new VueI18n({
-    locale: process.env.APP_LOCALE || 'en',
+    locale: process.env.APP_LOCALE || 'pt',
     messages: {
       en,
-      fr
+      pt
     }
   })
 }

@@ -1,112 +1,49 @@
 <template>
   <div id="app">
-    <div class="header">
-      <b-container>
-        <div class="d-flex justify-content-between">
-          <h3 class="text-muted">vue-boilerplate</h3>
-          <b-nav class="nav-pills float-right">
-            <b-nav-item 
-              to="/" 
-              exact
-            >Home</b-nav-item>
-            <b-nav-item to="/about">About</b-nav-item>
-            <b-nav-item to="/contact">Contact</b-nav-item>
-          </b-nav>
-        </div>
-      </b-container>
-    </div>
-
+    <Header></Header>
     <b-container>
-      <b-carousel 
-        v-if="$route.name === 'home'"
-        id="carousel1"
-        v-model="slide"
-        style="text-shadow: 1px 1px 2px #333;"
-        controls
-        indicators
-        background="#ababab"
-        :interval="4000"
-        img-width="1024"
-        img-height="480"
-        @sliding-start="onSlideStart"
-        @sliding-end="onSlideEnd"
-      >
-        <!-- Text slides with image -->
-        <b-carousel-slide 
-          caption="First slide"
-          text="Nulla vitae elit libero, a pharetra augue mollis interdum."
-          img-src="https://picsum.photos/1024/480/?image=52"
-        />
-
-        <!-- Slides with custom text -->
-        <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=54">
-          <h1>Hello world!</h1>
-        </b-carousel-slide>
-
-        <!-- Slides with image only -->
-        <b-carousel-slide img-src="https://picsum.photos/1024/480/?image=58" />
-
-        <!-- Slides with img slot -->
-        <!-- Note the classes .d-block and .img-fluid to prevent browser default image alignment -->
-        <b-carousel-slide>
-          <img 
-            slot="img" 
-            class="d-block img-fluid w-100" 
-            width="1024" 
-            height="480"
-            src="https://picsum.photos/1024/480/?image=55" 
-            alt="image slot"
-          >
-        </b-carousel-slide>
-
-        <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-        <b-carousel-slide 
-          caption="Blank Image" 
-          img-blank 
-          img-alt="Blank image"
-        >
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            eros felis, tincidunt a tincidunt eget, convallis vel est. Ut pellentesque
-            ut lacus vel interdum.
-          </p>
-        </b-carousel-slide>
-      </b-carousel>
-
-      <b-alert 
-        v-if="message" 
-        :variant="`${message.type}`"
-      >
-        {{ message.body }}
-      </b-alert>
-      <router-view />
+      <router-view/>
     </b-container>
-
-    <div class="footer">
-      <b-container>
-        <p><font-awesome-icon icon="code" /> with <font-awesome-icon icon="heart" /> by mycompany.com</p>
-      </b-container>
-    </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
+
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
+  components: {
+    Header,
+    Footer
+  },
   name: 'App',
   data() {
     return {
-      slide: 0,
-      sliding: null,
-      message: null
+      index: 0
     }
   },
+  mounted () {
+    this.setTags()
+  },
   methods: {
-    onSlideStart(slide) {
-      this.sliding = true
-    },
-    onSlideEnd(slide) {
-      this.sliding = false
-    }
+    ...mapActions([
+      'setTags'
+    ])
   }
 }
 </script>
+<style lang="scss">
+body, html {
+  height: 100%;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+</style>

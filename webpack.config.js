@@ -68,11 +68,6 @@ module.exports = {
         ])
       },
       {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre'
-      },
-      {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
@@ -103,6 +98,18 @@ module.exports = {
           name: 'fonts/[name].[ext]?[hash]',
           limit: 4096
         }
+      },
+      {
+        test: /\.(wav|mp3)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              name: 'audios/[name].[ext]?[hash]',
+              limit: 4096*100
+            }
+          }
+        ]
       }
     ]
   },
@@ -155,8 +162,7 @@ if (prerender) {
   module.exports.plugins.push(
     new PrerenderSPAPlugin({
       staticDir: path.resolve(__dirname, 'dist'),
-      routes: ['/', '/about', '/contact'],
-
+      routes: ['/', '/about', '/contact', '/audios'],
       renderer: new Renderer({
         headless: false
       })

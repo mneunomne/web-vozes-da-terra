@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Lite Vue Frontend boilerplate based on Bootstrap for pure showcase/prototype sites, with Webpack for assets management.",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --hot --progress --open",
+    "dev": "webpack-dev-server --mode development --hot --progress --open --fix",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --mode production --progress",
     "prerender": "rimraf dist && cross-env NODE_ENV=prerender webpack --mode production --progress",
     "lint": "eslint --ext .js,.vue src"
@@ -65,7 +65,9 @@
     "webpack-dev-server": "^3.1.9",
     "webpack-notifier": "^1.6.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "wavesurfer": "^1.3.4"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions"
