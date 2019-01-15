@@ -5,6 +5,7 @@ import Home from '@/views/Home'
 import About from '@/views/About'
 import Contact from '@/views/Contact'
 import Audios from '@/views/Audios'
+import Edit from '@/views/Edit'
 
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export function createRouter() {
         path: '/contact',
         name: 'contact',
         component: Contact
+      },
+      {
+        path: '/edit',
+        name: 'edit',
+        component: Edit
       }
     ]
   })
