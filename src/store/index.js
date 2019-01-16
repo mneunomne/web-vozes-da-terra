@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 const state = {
   data: audio_data,
-  tags: []
+  tags: [],
+  canEdit: false
 }
 
 const getters = {
@@ -18,6 +19,9 @@ const getters = {
   },
   getSomeAudios (state) {
     return state.data.slice(0, 100)
+  },
+  getCanEdit (state) {
+    return state.canEdit
   }
 }
 
@@ -46,12 +50,18 @@ const actions = {
       return b[1] - a[1];
     });
     commit('set_tags', payload)
+  },
+  setCanEdit({commit}) {
+    commit('set_can_edit')
   }
 }
 
 const mutations = {
   set_tags (state, payload) {
     state.tags = payload
+  },
+  set_can_edit (state) {
+    state.canEdit = true
   }
 }
 

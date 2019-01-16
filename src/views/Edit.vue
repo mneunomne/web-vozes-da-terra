@@ -1,6 +1,11 @@
 <template>
   <div>
+    <form class="password" v-if="!isPasswordCorrect">
+      Enter password:<br>
+      <input type="password" name="password" value="" v-model="password">
+    </form>
     <form class="form_element"
+      v-else
       v-for="(item, index) in getSomeAudios.slice(0, 10)"
       v-bind:key="item"
     >
@@ -25,7 +30,7 @@
 import VueAudio from 'vue-audio'
 import VueTagsInput from '@johmun/vue-tags-input'
 import AudioBox from '@/components/AudioBox'
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Audios',
@@ -38,27 +43,43 @@ export default {
     return {
       tag: '',
       tags: [],
-      models: []
+      models: [],
+      password: ''
     }
   },
   computed: {
+    isPasswordCorrect: function () {
+      return this.password === 'vozesdaterrapankararu'
+    },
     ...mapGetters([
-      'getSomeAudios'
+      'getSomeAudios',
+      'getCanEdit'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'setCanEdit'
     ])
   },
   mounted () {}
 }
 </script>
 <style lang="scss" scoped>
-.form_element {
+form {
   border: 1px solid #ccc;
   padding: 1em;
   margin-bottom: 2em;
 }
 
 input {
-  width: 450px;
   margin-bottom: 0.5em;
+  border: 1px solid #ccc;
+}
+
+.password {
+  input {
+    border: 1px solid red;
+  }
 }
 
 .audio-el {
