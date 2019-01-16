@@ -41,17 +41,19 @@ export default {
     }
   },
   mounted () {
-    this.$nextTick(() => {
-      this.wavesurfer = WaveSurfer.create({
-          container: '#waveform-' + this.index,
-          waveColor: 'black',
-          progressColor: 'purple'
-      })
-      this.wavesurfer.on('error',() => {
-        this.error = true
-      });
-      this.wavesurfer.load('./src/assets/audios/'+this.filename)
-    }) 
+    setTimeout(() => {
+      this.$nextTick(() => {
+        this.wavesurfer = WaveSurfer.create({
+            container: '#waveform-' + this.index,
+            waveColor: 'black',
+            progressColor: 'purple'
+        })
+        this.wavesurfer.on('error',() => {
+          this.error = true
+        });
+        this.wavesurfer.load('./src/assets/audios/'+this.filename)
+      }) 
+    }, 1000)
   }
 }
 </script>

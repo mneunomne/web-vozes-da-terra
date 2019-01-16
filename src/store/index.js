@@ -53,6 +53,9 @@ const actions = {
   },
   setCanEdit({commit}) {
     commit('set_can_edit')
+  },
+  updateJSON({state}, data) {
+    const blob = new Blob([data], {type: ''})
   }
 }
 
