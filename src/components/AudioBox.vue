@@ -1,11 +1,16 @@
 <template>
-  <div class="audio-box" v-if="type === 'toantes' && !error">
+  <div class="audio-box" v-if="!error">
     <p class="filename">{{ filename }}</p>
     <div class="tags">
-      <a class="tag-name" v-for="item in tags" v-bind:key="item">{{ item }}</a>
+      <a 
+        class="tag-name"
+        v-for="item in tags"
+        v-bind:key="item"
+        @click="onTagClick"
+      >{{ item }}</a>
     </div>
     <div class="waveform-box" :id="'waveform-' + this.index"></div>
-    <a @click="play">Play</a>
+    <a @click="playPause">{{ getIsPlaying ? 'Pause' : 'Play' }}</a>
   </div>
 </template>
 
@@ -16,7 +21,8 @@ export default {
   data () {
     return {
       wavesurfer: null,
-      error: false
+      error: false,
+      status: ''
     }
   },
   props: {
@@ -35,25 +41,32 @@ export default {
       required: true
     }
   },
+  computed: {
+    getIsPlaying: function () {
+      return this.status === 'playing'
+    }
+  },
   methods: {
-    play () {
-      this.wavesurfer.play()
+    playPause () {
+      this.wavesurfer.playPause()
+      this.status = this.wavesurfer.isPlaying() ? 'playing' : 'paused'
+    },
+    onTagClick (evt) {
+      this.$emit('onTagClick', evt.target.innerText)
     }
   },
   mounted () {
-    setTimeout(() => {
-      this.$nextTick(() => {
-        this.wavesurfer = WaveSurfer.create({
-            container: '#waveform-' + this.index,
-            waveColor: 'black',
-            progressColor: 'purple'
-        })
-        this.wavesurfer.on('error',() => {
-          this.error = true
-        });
-        this.wavesurfer.load('./src/assets/audios/'+this.filename)
-      }) 
-    }, 1000)
+    this.$nextTick(() => {
+      this.wavesurfer = WaveSurfer.create({
+          container: '#waveform-' + this.index,
+          waveColor: 'black',
+          progressColor: 'purple'
+      })
+      this.wavesurfer.on('error',() => {
+        this.error = true
+      });
+      this.wavesurfer.load('./src/assets/audios/'+this.filename)
+    }) 
   }
 }
 </script>

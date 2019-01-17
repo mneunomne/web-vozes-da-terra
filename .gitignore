@@ -8,5 +8,5 @@ yarn-error.log*
 .idea
 .vscode
 .env
-*.wav
+.wav
 yarn.lock

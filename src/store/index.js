@@ -18,7 +18,7 @@ const getters = {
     return state.tags
   },
   getSomeAudios (state) {
-    return state.data.slice(0, 100)
+    return state.data.slice(0, 30)
   },
   getCanEdit (state) {
     return state.canEdit
@@ -56,6 +56,20 @@ const actions = {
   },
   updateJSON({state}, data) {
     const blob = new Blob([data], {type: ''})
+  },
+  fetchAudiosByTags ({state}, filter) {
+    console.log('filter', filter)
+    let response = []
+    let data = state.data
+    for (let i in data) {
+      let tags = data[i].tags
+      for (let j in tags) {
+        if (tags[j].toLowerCase() === filter.toLowerCase()) {
+          response.push(data[i])
+        }
+      }
+    }
+    return response
   }
 }
 
