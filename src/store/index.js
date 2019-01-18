@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import audio_data from '@/assets/audios' 
+import utils from '@/utils'
+
 
 Vue.use(Vuex)
 
@@ -30,7 +32,7 @@ const getters = {
 }
 
 const actions = {
-  setTags ({state, commit}) {    
+  setTags ({state, commit}) {
     let payload = []
     let data = state.data
     for (let i in data) {
@@ -57,6 +59,13 @@ const actions = {
   },
   setCanEdit({commit}) {
     commit('set_can_edit')
+  },
+  setLocalData ({state, commit}) {
+    let payload = state.data
+    for (let i in payload) {
+      payload[i].id = utils.generateUID()
+    }
+    commit('set_data', payload)
   },
   updateJSON({state}, data) {
     const blob = new Blob([data], {type: ''})
@@ -85,8 +94,11 @@ const mutations = {
   },
   set_can_edit (state) {
     state.canEdit = true
+  },
+  set_data (state, payload) {
+    state.data = payload
   }
-}
+ }
 
 export function createStore() {
   return new Vuex.Store({

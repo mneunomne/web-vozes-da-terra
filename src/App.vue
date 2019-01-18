@@ -54,11 +54,13 @@ export default {
     window.addEventListener('resize', () => {
       this.setIsMobile()
     })
+    this.setLocalData()
   },
   methods: {
     ...mapActions([
       'setTags',
-      'setIsMobile'
+      'setIsMobile',
+      'setLocalData'
     ])
   }
 }

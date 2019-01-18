@@ -1,17 +1,19 @@
 <template>
-  <div class="audio-box" v-if="!error">
-    <p class="filename">{{ filename }}</p>
-    <div class="tags">
-      <a 
-        class="tag-name"
-        v-for="item in tags"
-        v-bind:key="item"
-        @click="onTagClick"
-      >{{ item }}</a>
+  <transition name="fade" delay="200">
+    <div class="audio-box" v-if="!error">
+      <p class="filename">{{ filename }}</p>
+      <div class="tags">
+        <a 
+          class="tag-name"
+          v-for="item in tags"
+          v-bind:key="item"
+          @click="onTagClick"
+        >{{ item }}</a>
+      </div>
+      <div :class="{'loading': !isLoaded}" class="waveform-box" :id="'waveform-' + this.id"></div>
+      <a @click="playPause">{{ getIsPlaying ? 'Pause' : 'Play' }}</a>
     </div>
-    <div class="waveform-box" :id="'waveform-' + this.index"></div>
-    <a @click="playPause">{{ getIsPlaying ? 'Pause' : 'Play' }}</a>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -22,7 +24,8 @@ export default {
     return {
       wavesurfer: null,
       error: false,
-      status: ''
+      status: '',
+      isLoaded: false
     }
   },
   props: {
@@ -39,6 +42,10 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    id: {
+      type: String,
+      required: true 
     }
   },
   computed: {
@@ -58,13 +65,17 @@ export default {
   mounted () {
     this.$nextTick(() => {
       this.wavesurfer = WaveSurfer.create({
-          container: '#waveform-' + this.index,
+          container: '#waveform-' + this.id,
           waveColor: 'black',
           progressColor: 'purple'
       })
       this.wavesurfer.on('error',() => {
         this.error = true
-      });
+      })
+
+      this.wavesurfer.on('ready',() => {
+        this.isLoaded = true
+      })
       this.wavesurfer.load('./src/assets/audios/'+this.filename)
     }) 
   }
@@ -94,6 +105,18 @@ a {
 
 .waveform-box {
   // width: 100%;
+  &.loading {
+    background: url('../assets/images/loading.gif') center no-repeat;
+    background-size: contain;
+  }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.2s .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
+  transition: opacity 0.2s .5s;
+  opacity: 0;
 }
 </style>
 
