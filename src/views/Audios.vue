@@ -26,8 +26,9 @@ export default {
       busy: false,
       audios: [],
       filteredAudios: [],
-      lastAudioIndex: 0,
-      isFiltering: false
+      lastAudioIndex: 5,
+      isFiltering: false,
+      maxItensPerPage: 15
     }
   },
   components: {
@@ -43,35 +44,23 @@ export default {
       'fetchAudiosByTags'
     ]),
     getCurrentAudios () {
-      if (this.isFiltering) {
-        return this.filteredAudios
-        } else {
-        return this.getAudioData
-      }
+      let resp = this.isFiltering ? this.filteredAudios : this.getAudioData
+      let end =  Math.min(this.lastAudioIndex+5, resp.length)
+      let start = Math.max(0, end-this.maxItensPerPage)
+      return resp.slice(start, end) 
     },
     loadAudios () {
-      let cur = this.getCurrentAudios()
-      let len = cur.length
-      let counter = 0
-      for(let i in cur.slice(this.index, len)) {
-        counter++
-        if (counter > 10) break
-        this.audios.push(cur[i])
-        this.lastAudioIndex++
-      }
+      console.log('load', this.lastAudioIndex)
+      this.lastAudioIndex += 1
     },
     filterByTag (data) {
       this.lastAudioIndex = 0
-      // console.log('data', data)
       this.fetchAudiosByTags(data).then(resp => {
-        console.log('resp', resp)
         this.isFiltering = true
         this.filteredAudios = resp
       })
     }
   },
-  mounted () {
-    this.loadAudios()
-  }
+  mounted () {}
 }
 </script>

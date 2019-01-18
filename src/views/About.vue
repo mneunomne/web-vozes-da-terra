@@ -27,6 +27,9 @@
 
 <script>
 export default {
-  name: 'About'
+  name: 'About',
+  mounted () {
+    console.log(this)
+  }
 }
 </script>

@@ -34,3 +34,19 @@ a {
   margin-right: 0px;
   margin-left: 0px;
 }
+
+.lang-button {
+  position: absolute;
+  right: 30px;
+  display: inline-flex;
+  background: white;
+  span {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    &.selected {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,14 +1,14 @@
 <template>
-  <div class="header">
-    <div class="title">
-      <div>
-        <a @click="isMenuOpen = !isMenuOpen" class="nav-link nav-item">Vozes da Terra</a>        
+  <div class="header" :class="{ 'isDesktop': !getIsMobile }">
+    <div class="header--content" v-if="getIsMobile">
+      <div class="title">
+        <a @click="isMenuOpen = !isMenuOpen" class="nav-link nav-item">Vozes da Terra</a>
         <NavMenu class="nav-menu" :class="{'isMenuOpen': isMenuOpen}"></NavMenu>
       </div>
-    </div>
-    <div class="lang-button">
-      <span @click="$i18n.locale ='en'" :class="{ 'selected': $i18n.locale === 'en' }">en</span>
-      <span @click="$i18n.locale ='pt'" :class="{ 'selected': $i18n.locale === 'pt' }">pt</span>
+      <div class="lang-button">
+        <span @click="$i18n.locale ='en'" :class="{ 'selected': $i18n.locale === 'en' }">en</span>
+        <span @click="$i18n.locale ='pt'" :class="{ 'selected': $i18n.locale === 'pt' }">pt</span>
+      </div>
     </div>
   </div>
 </template>
@@ -26,7 +26,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getAudioData'
+      'getAudioData',
+      'getIsMobile'
     ])
   },
   data () {
@@ -36,21 +37,23 @@ export default {
   },
   mounted () {
     console.log('getAudioData' ,this.getAudioData)
-  }  
+  }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .header {
   margin-bottom: 2em;
   padding: 15px;
   background: url('../assets/images/potes.jpg') fixed no-repeat top;
   background-size: contain;
+  &.isDesktop {
+    min-height: 125px;
+  }
 }
 
 .title {
-  display: inline-flex;
+  display: inline-block;
 }
-
 
 .nav-menu {
   transition: all 0.3s;
@@ -58,21 +61,6 @@ export default {
   height: 0px;
   &.isMenuOpen {
     height: 70px;
-  }
-} 
-
-.lang-button {
-  float: right;
-  display: inline-flex;
-  background: white;
-  span {
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-    text-align: center;
-    &.selected {
-      text-decoration: underline;
-    }
   }
 }
 </style>

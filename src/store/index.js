@@ -7,7 +7,8 @@ Vue.use(Vuex)
 const state = {
   data: audio_data,
   tags: [],
-  canEdit: false
+  canEdit: false,
+  isMobile: window.innerWidth < 845
 }
 
 const getters = {
@@ -22,6 +23,9 @@ const getters = {
   },
   getCanEdit (state) {
     return state.canEdit
+  },
+  getIsMobile (state) {
+    return state.isMobile
   }
 }
 
@@ -58,7 +62,6 @@ const actions = {
     const blob = new Blob([data], {type: ''})
   },
   fetchAudiosByTags ({state}, filter) {
-    console.log('filter', filter)
     let response = []
     let data = state.data
     for (let i in data) {
@@ -70,6 +73,9 @@ const actions = {
       }
     }
     return response
+  },
+  setIsMobile ({state}) {
+    state.isMobile = window.innerWidth < 845
   }
 }
 
