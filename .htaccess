@@ -1,2 +1,2 @@
 RewriteEngine On
-RewriteRule ^$ /docs [L]
+RewriteRule ^$ /docs/ [L]
