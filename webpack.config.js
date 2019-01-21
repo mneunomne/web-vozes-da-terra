@@ -47,7 +47,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: production ? '[name].[chunkhash].js' : '[name].js',
-    publicPath: '/'
+    publicPath: '/docs'
   },
   module: {
     rules: [
