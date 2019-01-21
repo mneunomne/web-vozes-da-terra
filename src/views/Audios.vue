@@ -57,7 +57,7 @@ export default {
       setTimeout(() => {
         this.lastAudioIndex += 1
         this.busy = false
-      }, 1000)
+      }, 300)
     },
     filterByTag (data) {
       this.currentTag = data
