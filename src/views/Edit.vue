@@ -4,25 +4,37 @@
       Enter password:<br>
       <input type="password" name="password" value="" v-model="password">
     </form>
-    <form class="form_element"
-      v-else
-      v-for="(item, index) in getSomeAudios.slice(0, 10)"
-      v-bind:key="item"
-    >
-      <p>{{ index }}</p>
-      filename:<br>
-      <input type="text" name="filename" :value="item.filename">
-      <br>
-      tags:<br>
-      <vue-tags-input
-        v-model="models[index]"
-        :tags="item.tags"
-        @tags-changed="newTags => tags = newTags"
-      />
-      <br>
-      audio:<br>
-      <vue-audio class="audio-el" :file="'./src/assets/audios/'+item.filename"/>
-    </form>
+    <div v-else>
+      <b-row class="mb-2">
+        <button class="btn-success" @click="onSave">Save</button>
+      </b-row>
+      <b-row class="mb-2">
+        <a
+          class="tag-name"
+          v-for="type in getTypes"
+          v-bind:key="type[0]"
+          @click="onTypeClick"
+        >{{ type[0] }}</a>
+      </b-row>
+      <form class="form_element"
+        v-for="(item, index) in fetchAudiosByType('entre')"
+        v-bind:key="item"
+      >
+        <p>{{ index }}</p>
+        filename:<br>
+        <input type="text" name="filename" :value="item.filename">
+        <br>
+        tags:<br>
+        <vue-tags-input
+          v-model="models[index]"
+          :tags="item.tags"
+          @tags-changed="newTags => tags = newTags"
+        />
+        <br>
+        audio:<br>
+        <vue-audio class="audio-el" :file="'./src/assets/audios/'+item.filename"/>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -44,7 +56,7 @@ export default {
       tag: '',
       tags: [],
       models: [],
-      password: ''
+      password: 'vozesdaterrapankararu'
     }
   },
   computed: {
@@ -53,13 +65,26 @@ export default {
     },
     ...mapGetters([
       'getSomeAudios',
-      'getCanEdit'
+      'getCanEdit',
+      'getAudioData',
+      'getTypes'
     ])
   },
   methods: {
     ...mapActions([
-      'setCanEdit'
-    ])
+      'setCanEdit',
+      'updateJSON',
+      'fetchAudiosByType'
+    ]),
+    onSave () {
+      console.log('save')
+      // get Data
+      
+      // this.updateJSON()
+    },
+    onTypeClick (type) {
+      console.log('type', type)
+    }
   },
   mounted () {}
 }

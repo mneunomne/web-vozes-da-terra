@@ -50,3 +50,17 @@ a {
     }
   }
 }
+
+.tag-name {
+  cursor: pointer;
+  margin-right: 4px;
+  font-size: 10px;
+  display: inline-block;
+  &:hover {
+    color: blue !important;
+  }
+  &.active {
+    color: blue !important;
+    text-decoration: underline !important;
+  }
+}

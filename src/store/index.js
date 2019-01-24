@@ -28,6 +28,9 @@ const getters = {
   },
   getIsMobile (state) {
     return state.isMobile
+  },
+  getTypes (state) {
+    return state.types
   }
 }
 
@@ -57,6 +60,25 @@ const actions = {
     });
     commit('set_tags', payload)
   },
+  setTypes ({commit}) {
+    console.log('set types')
+    let payload = []
+    let data = state.data
+    for (let i in data) {
+      let hasFound = false
+      for(let j in payload) {
+        if (payload[j][0] === data[i].type) {
+          payload[j][1]++
+          hasFound = true
+          break
+        }
+      }
+      if (!hasFound) {
+        payload.push([data[i].type, 0])
+      }
+    }
+    commit('set_types', payload)
+  },
   setCanEdit({commit}) {
     commit('set_can_edit')
   },
@@ -68,7 +90,8 @@ const actions = {
     commit('set_data', payload)
   },
   updateJSON({state}, data) {
-    const blob = new Blob([data], {type: ''})
+    var FileSaver = require('file-saver')
+    console.log('FileSaver', FileSaver)
   },
   fetchAudiosByTags ({state}, filter) {
     let response = []
@@ -79,6 +102,16 @@ const actions = {
         if (tags[j].toLowerCase() === filter.toLowerCase()) {
           response.push(data[i])
         }
+      }
+    }
+    return response
+  },
+  fetchAudiosByType ({state}, type) {
+    let response = []
+    let data = state.data
+    for (let i in data) {
+      if (data[i].type === type) {
+        response.push(data[i])
       }
     }
     return response
@@ -97,6 +130,9 @@ const mutations = {
   },
   set_data (state, payload) {
     state.data = payload
+  },
+  set_types (state, payload) {
+    state.types = payload
   }
  }
 

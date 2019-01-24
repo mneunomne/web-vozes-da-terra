@@ -1,7 +1,18 @@
 <template>
   <div>
-    <h2>{{ $t('audios.title') }}</h2>
-    <h3 v-if="currentTag !== ''">{{ currentTag }}</h3>
+    <header class="mb-4">
+      <h2 class="page-title">{{ $t('audios.title') }}</h2>
+      <div class="filter-types">
+        <a
+          class="tag-name"
+          v-for="type in getTypes"
+          v-bind:key="type[0]"
+          @click="onTypeClick"
+          :class="{'active': currentFilter === type[0]}"
+        >{{ type[0] }}</a>
+      </div>
+      <h3 v-if="currentFilter !== ''">{{ currentFilter }}</h3>
+    </header>
     <div v-infinite-scroll="loadAudios" infinite-scroll-disabled="busy">
       <AudioBox
         v-for="(item, index) in getCurrentAudios()"
@@ -31,7 +42,7 @@ export default {
       lastAudioIndex: 5,
       isFiltering: false,
       maxItensPerPage: 15,
-      currentTag: ''
+      currentFilter: ''
     }
   },
   components: {
@@ -39,12 +50,14 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'getAudioData'
+      'getAudioData',
+      'getTypes'
     ])
   },
   methods: {
     ...mapActions([
-      'fetchAudiosByTags'
+      'fetchAudiosByTags',
+      'fetchAudiosByType'
     ]),
     getCurrentAudios () {
       let resp = this.isFiltering ? this.filteredAudios : this.getAudioData
@@ -60,9 +73,18 @@ export default {
       }, 300)
     },
     filterByTag (data) {
-      this.currentTag = data
+      this.currentFilter = data
       this.lastAudioIndex = 0
       this.fetchAudiosByTags(data).then(resp => {
+        this.isFiltering = true
+        this.filteredAudios = resp
+      })
+    },
+    onTypeClick (evt) {
+      let type = evt.target.innerText
+      this.currentFilter = type
+      this.lastAudioIndex = 0
+      this.fetchAudiosByType(type).then(resp => {
         this.isFiltering = true
         this.filteredAudios = resp
       })
@@ -75,8 +97,21 @@ export default {
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
 }
+
+
 .fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
   opacity: 0;
+}
+
+.page-title {
+  display: -webkit-inline-box;
+}
+
+.filter-types {
+  float: right;
+  .tag-name {
+    font-size: 12px;
+  }
 }
 </style>
 

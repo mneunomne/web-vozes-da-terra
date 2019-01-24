@@ -47,21 +47,23 @@ export default {
       'getIsMobile'
     ])
   },
-  mounted () {
-    this.setTags()
-  },
   created () {
     window.addEventListener('resize', () => {
       this.setIsMobile()
     })
     this.setLocalData()
+    this.setTags()
+    this.setTypes()
   },
   methods: {
     ...mapActions([
       'setTags',
       'setIsMobile',
-      'setLocalData'
+      'setLocalData',
+      'setTypes'
     ])
+  },
+  mounted () {
   }
 }
 </script>

@@ -47,7 +47,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: production ? '[name].[chunkhash].js' : '[name].js',
-    publicPath: '/docs'
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -85,7 +85,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              name: '/images/[name].[ext]?[hash]',
+              name: 'images/[name].[ext]?[hash]',
               limit: 4096
             }
           }
@@ -106,7 +106,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               name: 'audios/[name].[ext]?[hash]',
-              limit: 4096*100
+              limit: 4096
             }
           }
         ]

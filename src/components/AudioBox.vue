@@ -92,17 +92,6 @@ export default {
   word-break: break-all;
 }
 
-a {
-  cursor: pointer;
-  margin-right: 4px;
-  font-size: 10px;
-  display: inline-block;
-  text-decoration: underline !important;
-  &:hover {
-    color: blue !important;
-  }
-}
-
 .waveform-box {
   // width: 100%;
   &.loading {
