@@ -79,13 +79,7 @@ export default {
     ]),
     onSave () {
       console.log('save')
-      this.saveJson()
-      // get Data
-      
-      // this.updateJSON()
-    },
-    onTypeClick (type) {
-      console.log('type', type)
+      this.updateJSON(this.getAudioData)
     }
   },
   mounted () {}

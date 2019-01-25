@@ -81,10 +81,12 @@ export default {
       })
     },
     onTypeClick (evt) {
+      console.log('filter type')
       let type = evt.target.innerText
       this.currentFilter = type
       this.lastAudioIndex = 0
       this.fetchAudiosByType(type).then(resp => {
+        console.log('resp', resp)
         this.isFiltering = true
         this.filteredAudios = resp
       })
