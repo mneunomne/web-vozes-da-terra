@@ -61,7 +61,6 @@ const actions = {
     commit('set_tags', payload)
   },
   setTypes ({commit}) {
-    console.log('set types')
     let payload = []
     let data = state.data
     for (let i in data) {
@@ -85,7 +84,7 @@ const actions = {
   setLocalData ({state, commit}) {
     let payload = state.data
     for (let i in payload) {
-      payload[i].id = utils.generateUID()
+      payload[i].id = payload[i].id || utils.generateUID()
     }
     commit('set_data', payload)
   },
@@ -118,6 +117,9 @@ const actions = {
   },
   setIsMobile ({state}) {
     state.isMobile = window.innerWidth < 845
+  },
+  saveJson ({commit}) {
+    commit('save_file')
   }
 }
 
@@ -133,6 +135,11 @@ const mutations = {
   },
   set_types (state, payload) {
     state.types = payload
+  },
+  save_file (state) {
+    var FileSaver = require('file-saver')
+    var blob = new Blob(JSON.parse(state.data), {type: "application/json;charset=utf-8"})
+    FileSaver.saveAs(blob, "data-test.json")
   }
  }
 

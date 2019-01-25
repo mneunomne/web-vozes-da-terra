@@ -8,31 +8,31 @@
       <b-row class="mb-2">
         <button class="btn-success" @click="onSave">Save</button>
       </b-row>
-      <b-row class="mb-2">
-        <a
-          class="tag-name"
-          v-for="type in getTypes"
-          v-bind:key="type[0]"
-          @click="onTypeClick"
-        >{{ type[0] }}</a>
-      </b-row>
       <form class="form_element"
-        v-for="(item, index) in fetchAudiosByType('entre')"
+        v-for="(item, index) in getAudioData"
         v-bind:key="item"
       >
-        <p>{{ index }}</p>
-        filename:<br>
-        <input type="text" name="filename" :value="item.filename">
+        <div class="form-row">
+          filename:<br>
+          <input type="text" name="filename" :value="item.filename">
+        </div>
+        <div class="form-row">
+          id:<br>
+          <p><b>{{ item.id }}</b></p>
+        </div>
+        <div  class="form-row">
+          tags:<br>
+          <vue-tags-input
+            v-model="models[index]"
+            :tags="item.tags"
+            @tags-changed="newTags => tags = newTags"
+          />
+        </div>
+        <div  class="form-row">
         <br>
-        tags:<br>
-        <vue-tags-input
-          v-model="models[index]"
-          :tags="item.tags"
-          @tags-changed="newTags => tags = newTags"
-        />
-        <br>
-        audio:<br>
-        <vue-audio class="audio-el" :file="'./src/assets/audios/'+item.filename"/>
+          audio:<br>
+          <vue-audio class="audio-el" :file="'./src/assets/audios/'+item.filename"/>
+        </div>
       </form>
     </div>
   </div>
@@ -74,10 +74,12 @@ export default {
     ...mapActions([
       'setCanEdit',
       'updateJSON',
-      'fetchAudiosByType'
+      'fetchAudiosByType',
+      'saveJson'
     ]),
     onSave () {
       console.log('save')
+      this.saveJson()
       // get Data
       
       // this.updateJSON()
@@ -99,6 +101,8 @@ form {
 input {
   margin-bottom: 0.5em;
   border: 1px solid #ccc;
+  width: 450px;
+  max-width: 100%;
 }
 
 .password {
