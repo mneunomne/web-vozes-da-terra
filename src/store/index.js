@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import audio_data from '@/assets/audios' 
 import utils from '@/utils'
-
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -90,8 +90,17 @@ const actions = {
     commit('set_data', payload)
   },
   updateJSON({state}, data) {
-    var FileSaver = require('file-saver')
-    console.log('FileSaver', FileSaver)
+    axios.post('../assets', JSON.stringify(data), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function (res) {
+      console.log('success', res)
+    })
+    .catch(function (err) {
+      console.log('error', err)
+    });
   },
   fetchAudiosByTags ({state}, filter) {
     let response = []

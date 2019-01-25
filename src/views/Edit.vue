@@ -17,7 +17,7 @@
         >{{ type[0] }}</a>
       </b-row>
       <form class="form_element"
-        v-for="(item, index) in fetchAudiosByType('entre')"
+        v-for="(item, index) in getAudioData"
         v-bind:key="item"
       >
         <p>{{ index }}</p>
@@ -78,12 +78,7 @@ export default {
     ]),
     onSave () {
       console.log('save')
-      // get Data
-      
-      // this.updateJSON()
-    },
-    onTypeClick (type) {
-      console.log('type', type)
+      this.updateJSON(this.getAudioData)
     }
   },
   mounted () {}
