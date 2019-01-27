@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import audio_data from '@/assets/audios' 
+// import audio_data from 'audios/index.js' 
 import utils from '@/utils'
 import axios from 'axios'
+
+var DATA_PATH = '/audios/data.json'
 
 Vue.use(Vuex)
 
 const state = {
-  data: audio_data,
+  audioData: [],
   tags: [],
   canEdit: false,
   isMobile: window.innerWidth < 845
@@ -15,13 +17,13 @@ const state = {
 
 const getters = {
   getAudioData (state) {
-    return state.data
+    return state.audioData
   },
   getSortedTags (state) {
     return state.tags
   },
   getSomeAudios (state) {
-    return state.data.slice(0, 30)
+    return state.audioData.slice(0, 30)
   },
   getCanEdit (state) {
     return state.canEdit
@@ -35,9 +37,27 @@ const getters = {
 }
 
 const actions = {
+  setAudioData ({commit}) {
+    axios.get(DATA_PATH, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function (res) {
+      let payload = res.data
+      console.log('success', res)
+      for (let i in payload) {
+        payload[i].id = payload[i].id || utils.generateUID()
+      }
+      commit('set_audio_data', payload)
+    })
+    .catch(function (err) {
+      console.log('error', err)
+    })
+  },
   setTags ({state, commit}) {
     let payload = []
-    let data = state.data
+    let data = state.audioData
     for (let i in data) {
       let tags = data[i].tags
       for (let j in tags) {
@@ -62,7 +82,7 @@ const actions = {
   },
   setTypes ({commit}) {
     let payload = []
-    let data = state.data
+    let data = state.audioData
     for (let i in data) {
       let hasFound = false
       for(let j in payload) {
@@ -82,28 +102,24 @@ const actions = {
     commit('set_can_edit')
   },
   setLocalData ({state, commit}) {
-    let payload = state.data
+    let payload = state.audioData
     for (let i in payload) {
       payload[i].id = payload[i].id || utils.generateUID()
     }
     commit('set_data', payload)
   },
   updateJSON({state}, data) {
-    axios.post('../assets', JSON.stringify(data), {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
+    axios.post('http://localhost:3001/audios/', data)
     .then(function (res) {
       console.log('success', res)
     })
     .catch(function (err) {
       console.log('error', err)
-    });
+    })
   },
   fetchAudiosByTags ({state}, filter) {
     let response = []
-    let data = state.data
+    let data = state.audioData
     for (let i in data) {
       let tags = data[i].tags
       for (let j in tags) {
@@ -116,7 +132,7 @@ const actions = {
   },
   fetchAudiosByType ({state}, type) {
     let response = []
-    let data = state.data
+    let data = state.audioData
     for (let i in data) {
       if (data[i].type === type) {
         response.push(data[i])
@@ -133,6 +149,9 @@ const actions = {
 }
 
 const mutations = {
+  set_audio_data (state, payload) {
+    state.audioData = payload
+  },
   set_tags (state, payload) {
     state.tags = payload
   },
@@ -140,14 +159,14 @@ const mutations = {
     state.canEdit = true
   },
   set_data (state, payload) {
-    state.data = payload
+    state.audioData = payload
   },
   set_types (state, payload) {
     state.types = payload
   },
   save_file (state) {
     var FileSaver = require('file-saver')
-    var blob = new Blob(JSON.parse(state.data), {type: "application/json;charset=utf-8"})
+    var blob = new Blob(JSON.parse(state.audioData), {type: "application/json;charset=utf-8"})
     FileSaver.saveAs(blob, "data-test.json")
   }
  }

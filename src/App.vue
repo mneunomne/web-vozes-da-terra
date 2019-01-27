@@ -51,6 +51,7 @@ export default {
     window.addEventListener('resize', () => {
       this.setIsMobile()
     })
+    this.setAudioData()
     this.setLocalData()
     this.setTags()
     this.setTypes()
@@ -60,7 +61,8 @@ export default {
       'setTags',
       'setIsMobile',
       'setLocalData',
-      'setTypes'
+      'setTypes',
+      'setAudioData'
     ])
   },
   mounted () {

@@ -76,7 +76,7 @@ export default {
       this.wavesurfer.on('ready',() => {
         this.isLoaded = true
       })
-      this.wavesurfer.load('./src/assets/audios/'+this.filename)
+      this.wavesurfer.load('./audios/'+this.filename)
     }) 
   }
 }

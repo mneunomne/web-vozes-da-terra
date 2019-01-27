@@ -8,31 +8,34 @@
       <b-row class="mb-2">
         <button class="btn-success" @click="onSave">Save</button>
       </b-row>
-      <form class="form_element"
-        v-for="(item, index) in getAudioData"
-        v-bind:key="item"
-      >
-        <div class="form-row">
-          filename:<br>
-          <input type="text" name="filename" :value="item.filename">
-        </div>
-        <div class="form-row">
-          id:<br>
-          <p><b>{{ item.id }}</b></p>
-        </div>
-        <div  class="form-row">
-          tags:<br>
-          <vue-tags-input
-            v-model="models[index]"
-            :tags="item.tags"
-            @tags-changed="newTags => tags = newTags"
-          />
-        </div>
-        <div  class="form-row">
-        <br>
-          audio:<br>
-          <vue-audio class="audio-el" :file="'./src/assets/audios/'+item.filename"/>
-        </div>
+      <form class="form_edit">
+        <form class="form_element"
+          v-for="(item, index) in formData"
+          :key="index"
+        >
+          <div class="form-row">
+            filename:<br>
+            <input type="text" name="filename" :value="item.filename">
+          </div>
+          <div class="form-row">
+            id:<br>
+            <p><b>{{ item.id }}</b></p>
+          </div>
+          <div  class="form-row">
+            tags:<br>
+            <vue-tags-input v-if="item.tags !== undefined"
+              @before-adding-tag="handler => addingTag(handler, index)"
+              v-model="tag[item.id]"
+              :tags="validateTags(item.tags)"
+              @tags-changed="newTags => onChangeTags(newTags, item.id)"
+            />
+          </div>
+          <div  class="form-row">
+          <br>
+            audio:<br>
+            <vue-audio class="audio-el" :file="'./audios/'+item.filename"/>
+          </div>
+        </form>
       </form>
     </div>
   </div>
@@ -40,7 +43,7 @@
 
 <script>
 import VueAudio from 'vue-audio'
-import VueTagsInput from '@johmun/vue-tags-input'
+import { VueTagsInput, createTag, createTags } from '@johmun/vue-tags-input';
 import AudioBox from '@/components/AudioBox'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -56,6 +59,7 @@ export default {
       tag: '',
       tags: [],
       models: [],
+      formData: [],
       password: 'vozesdaterrapankararu'
     }
   },
@@ -79,10 +83,35 @@ export default {
     ]),
     onSave () {
       console.log('save')
-      this.updateJSON(this.getAudioData)
+      console.log('models', this.tags, this.models)
+      this.updateJSON(this.formData)
+    },
+    onChangeTags (newTags, id) {
+      this.formData = this.formData.filter(function (item) {
+        if (item.id === id) {
+          item.tags = newTags.map(function(tag) {
+            return tag.text
+          })
+        }
+        return true
+      })
+    },
+    addingTag(handler, myIndex) {
+      handler.addTag()
+    },
+    validateTags (tags) {
+      return createTags(tags)
     }
   },
-  mounted () {}
+  mounted () {
+    this.formData = this.getAudioData
+    console.log('this.formData', this.formData)
+  },
+  watch: {
+    getAudioData (val) {
+      this.formData = this.getAudioData
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

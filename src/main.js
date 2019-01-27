@@ -16,6 +16,8 @@ import { createRouter } from './router'
 import { createStore } from './store'
 import { createI18n } from './i18n'
 
+Vue.config.productionTip = false
+
 Vue.use(infiniteScroll)
 
 export function createApp() {
