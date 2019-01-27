@@ -13,28 +13,32 @@
           v-for="(item, index) in formData"
           :key="index"
         >
-          <div class="form-row">
+          <div class="form">
             filename:<br>
             <input type="text" name="filename" :value="item.filename">
           </div>
-          <div class="form-row">
-            id:<br>
-            <p><b>{{ item.id }}</b></p>
+          <div class="form">
+            id:
+            <span><b>{{ item.id }}</b></span>
           </div>
-          <div  class="form-row">
+          <div  class="form">
             tags:<br>
             <vue-tags-input v-if="item.tags !== undefined"
-              @before-adding-tag="handler => addingTag(handler, index)"
-              v-model="tag[item.id]"
+              @before-adding-tag="handler => addingTag(handler, item.id)"
+              v-model="tags[item.id]"
               :tags="validateTags(item.tags)"
               @tags-changed="newTags => onChangeTags(newTags, item.id)"
             />
           </div>
-          <div  class="form-row">
-          <br>
+          <div  class="form">
             audio:<br>
             <vue-audio class="audio-el" :file="'./audios/'+item.filename"/>
           </div>
+          <button
+            type="button"
+            class="btn btn-danger"
+            @click="onClickDelete(item.id)"
+          >Delete</button>
         </form>
       </form>
     </div>
@@ -96,11 +100,20 @@ export default {
         return true
       })
     },
-    addingTag(handler, myIndex) {
+    addingTag(handler, id) {
       handler.addTag()
+      this.tags[id] = ''
     },
     validateTags (tags) {
       return createTags(tags)
+    },
+    onClickDelete (id) {
+      var r = confirm("Tem certeza que quer deletar esse áudio ?")
+      if (r == true) {
+        this.formData = this.formData.filter(function (item) {
+          return item.id !== id
+        })
+      }
     }
   },
   mounted () {
@@ -116,9 +129,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 form {
-  border: 1px solid #ccc;
   padding: 1em;
   margin-bottom: 2em;
+}
+
+.form {
+  margin-bottom: 1em;
+  border: 1px dotted #ccc;
+  padding: 0.5em;
+  background: white;
+  &_element {
+    border: 1px solid #ccc;
+  }
 }
 
 input {

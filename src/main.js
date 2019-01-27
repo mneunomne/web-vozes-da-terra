@@ -16,8 +16,12 @@ import { createRouter } from './router'
 import { createStore } from './store'
 import { createI18n } from './i18n'
 
+import AudioVisual from 'vue-audio-visual'
+
+
 Vue.config.productionTip = false
 
+Vue.use(AudioVisual)
 Vue.use(infiniteScroll)
 
 export function createApp() {

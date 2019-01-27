@@ -86,7 +86,6 @@ export default {
       this.currentFilter = type
       this.lastAudioIndex = 0
       this.fetchAudiosByType(type).then(resp => {
-        console.log('resp', resp)
         this.isFiltering = true
         this.filteredAudios = resp
       })

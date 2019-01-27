@@ -18,6 +18,7 @@
 
 <script>
 import WaveSurfer from 'wavesurfer'
+
 export default {
   name: 'AudioBox',
   data () {
@@ -64,19 +65,20 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
+      console.log('WaveSurfer', WaveSurfer)
       this.wavesurfer = WaveSurfer.create({
           container: '#waveform-' + this.id,
           waveColor: 'black',
-          progressColor: 'purple'
+          progressColor: 'purple',
+          responsive: true
       })
       this.wavesurfer.on('error',() => {
         this.error = true
       })
-
       this.wavesurfer.on('ready',() => {
         this.isLoaded = true
       })
-      this.wavesurfer.load('./audios/'+this.filename)
+      this.wavesurfer.load('/audios/'+this.filename)
     }) 
   }
 }
