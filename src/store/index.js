@@ -36,6 +36,18 @@ const getters = {
   }
 }
 
+let object_model = {
+  title: '',
+  voiceOf: '',
+  timestamp: 0, 
+  filename: '',
+  lastPlayed: 0,
+  tags: [],
+  description: '',
+  type: '',
+  id: ''
+}
+
 const actions = {
   setAudioData ({commit}) {
     axios.get(DATA_PATH, {
@@ -45,10 +57,14 @@ const actions = {
     })
     .then(function (res) {
       let payload = res.data
-      console.log('success', res)
+      // set id if it isnt already set
       for (let i in payload) {
+        for (let j in object_model) {
+          payload[i][j] = payload[i][j] || object_model[j]  
+        }
         payload[i].id = payload[i].id || utils.generateUID()
       }
+      console.log('set_audio_data', payload)
       commit('set_audio_data', payload)
     })
     .catch(function (err) {

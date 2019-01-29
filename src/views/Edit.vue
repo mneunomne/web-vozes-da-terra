@@ -13,16 +13,43 @@
           v-for="(item, index) in formData"
           :key="index"
         >
-          <div class="form">
-            filename:<br>
-            <input type="text" name="filename" :value="item.filename">
+          <!-- Filename -->
+          <div class="input_field">
+            Filename<br>
+            <input class="value" disabled="true" type="text" name="filename" :value="item.filename">
           </div>
-          <div class="form">
-            id:
-            <span><b>{{ item.id }}</b></span>
+          <!-- Title -->
+          <div class="input_field">
+            Title<br>
+            <input class="value" type="text" @input="evt => onChange(evt, 'title', item.id)" :value="item.title">
           </div>
-          <div  class="form">
-            tags:<br>
+          <!-- Voice -->
+          <div class="input_field">
+            Performer<br>
+            <input class="value" type="text" @input="evt => onChange(evt, 'voiceOf', item.id)" name="author" :value="item.voiceOf">
+          </div>
+          <!-- Description -->
+          <div class="input_field">
+            Description<br>
+            <textarea class="value" @input="evt => onChange(evt, 'description', item.id)" type="description" name="filename" :value="item.description"></textarea>
+          </div>
+          <!-- Type -->
+          <div class="input_field">
+            Type<br>
+            <select name="" id="">
+              <option>{{ item.type }}</option>
+              <option>toantes</option>
+              <option>sons</option>
+            </select>
+          </div>
+          <!-- ID -->
+          <div class="input_field">
+            Id<br>
+            <input class="value" disabled="true" type="text" name="filename" :value="item.id">
+          </div>
+          <!-- TAGS -->
+          <div  class="input_field">
+            Tags<br>
             <vue-tags-input v-if="item.tags !== undefined"
               @before-adding-tag="handler => addingTag(handler, item.id)"
               v-model="tags[item.id]"
@@ -30,9 +57,9 @@
               @tags-changed="newTags => onChangeTags(newTags, item.id)"
             />
           </div>
-          <div  class="form">
-            audio:<br>
-            <vue-audio class="audio-el" :file="'./audios/'+item.filename"/>
+          <!-- MEDIA ELEMENT -->
+          <div class="audio-el">
+            <vue-audio :file="'./audios/'+item.filename"/>
           </div>
           <button
             type="button"
@@ -64,6 +91,7 @@ export default {
       tags: [],
       models: [],
       formData: [],
+      payload: {},
       password: 'vozesdaterrapankararu'
     }
   },
@@ -86,8 +114,17 @@ export default {
       'saveJson'
     ]),
     onSave () {
-      console.log('save')
-      console.log('models', this.tags, this.models)
+      let payload = this.payload
+      for (let id in payload){
+        this.formData = this.formData.map(function (item) {
+          if (item.id === id) {
+            for (let field in payload[id]) {
+              item[field] = payload[id][field]
+            }
+          }
+          return item
+        })
+      }
       this.updateJSON(this.formData)
     },
     onChangeTags (newTags, id) {
@@ -99,6 +136,12 @@ export default {
         }
         return true
       })
+    },
+    onChange (evt, type, id) {
+      console.log('evt', evt)
+      let data = evt.target.value
+      this.payload[id] = {}
+      this.payload[id][type] = data
     },
     addingTag(handler, id) {
       handler.addTag()
@@ -133,17 +176,15 @@ form {
   margin-bottom: 2em;
 }
 
-.form {
-  margin-bottom: 1em;
-  border: 1px dotted #ccc;
-  padding: 0.5em;
-  background: white;
-  &_element {
-    border: 1px solid #ccc;
-  }
+.input_field {
+  margin-bottom: 0.5em;
 }
 
-input {
+.form_element {
+  border: 1px solid #ccc;
+}
+
+.value {
   margin-bottom: 0.5em;
   border: 1px solid #ccc;
   width: 450px;
@@ -156,9 +197,12 @@ input {
   }
 }
 
+.btn-danger {
+  float: right;
+}
+
 .audio-el {
   display: -webkit-inline-box;
-  border: 1px solid #ccc;
   height: 47px;
   padding: 0px 5px 5px 5px;
 }

@@ -11,6 +11,7 @@
         >{{ item }}</a>
       </div>
       <div :class="{'loading': !isLoaded}" class="waveform-box" :id="'waveform-' + this.id"></div>
+      <div ref="controls" class="controls"></div>
       <a @click="playPause">{{ getIsPlaying ? 'Pause' : 'Play' }}</a>
     </div>
   </transition>
@@ -18,6 +19,7 @@
 
 <script>
 import WaveSurfer from 'wavesurfer'
+window.WaveSurfer = WaveSurfer
 
 export default {
   name: 'AudioBox',
@@ -65,12 +67,13 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      console.log('WaveSurfer', WaveSurfer)
+      console.log('WaveSurfer', WaveSurfer, this.$refs)
       this.wavesurfer = WaveSurfer.create({
           container: '#waveform-' + this.id,
           waveColor: 'black',
           progressColor: 'purple',
-          responsive: true
+          responsive: true,
+          mediaControls: true
       })
       this.wavesurfer.on('error',() => {
         this.error = true
