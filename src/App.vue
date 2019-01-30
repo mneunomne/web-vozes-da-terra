@@ -3,11 +3,11 @@
     <Header></Header>
       <b-container fluid>
         <b-row>
-          <b-col md="2" v-if="!getIsMobile">
+          <b-col class="side-menu" md="2" v-if="!getIsMobile">
             <a class="nav-link nav-item">Vozes da Terra</a>
             <NavMenu class="nav-menu" :class="{'isMenuOpen': true}"></NavMenu>
           </b-col>
-          <b-col md="8">
+          <b-col md="10">
             <router-view/>
           </b-col>
           <div class="lang-button" v-if="!getIsMobile">
@@ -72,6 +72,10 @@ export default {
 <style lang="scss">
 body, html {
   height: 100%;
+}
+
+.side-menu {
+  min-width: 150px;
 }
 
 #app {

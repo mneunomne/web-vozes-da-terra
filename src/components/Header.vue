@@ -45,7 +45,7 @@ export default {
   margin-bottom: 2em;
   padding: 15px;
   background: url('../assets/images/potes.jpg') fixed no-repeat top;
-  background-size: contain;
+  background-size: 100vw;
   &.isDesktop {
     min-height: 125px;
   }
@@ -60,7 +60,7 @@ export default {
   overflow: hidden;
   height: 0px;
   &.isMenuOpen {
-    height: 70px;
+    height: 120px;
   }
 }
 </style>

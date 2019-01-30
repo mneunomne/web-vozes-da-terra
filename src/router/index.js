@@ -6,6 +6,7 @@ import About from '@/views/About'
 import Contact from '@/views/Contact'
 import Audios from '@/views/Audios'
 import Edit from '@/views/Edit'
+import Gallery from '@/views/Gallery'
 
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ export function createRouter() {
         path: '/edit',
         name: 'edit',
         component: Edit
+      },
+      {
+        path: '/gallery',
+        name: 'gallery',
+        component: Gallery
       }
     ]
   })
