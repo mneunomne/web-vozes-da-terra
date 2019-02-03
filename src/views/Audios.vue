@@ -1,7 +1,9 @@
 <template>
   <div>
     <header class="mb-4">
-      <h2 class="page-title">{{ $t('audios.title') }}</h2>
+      <div class="row">
+        <h2 class="page-title">{{ $t('audios.title') }}</h2>
+      </div>
       <div class="filter-types">
         <a
           class="tag-name"

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h3>{{ $t('gallery.title') }}</h3>
+    <div class="row">
+      <h3>{{ $t('gallery.title') }}</h3>
+    </div>
     <gallery :images="images" :index="index" @close="index = null"></gallery>
     <div
       class="image"
