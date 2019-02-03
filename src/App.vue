@@ -74,10 +74,6 @@ body, html {
   height: 100%;
 }
 
-.side-menu {
-  min-width: 150px;
-}
-
 #app {
   display: flex;
   flex-direction: column;
