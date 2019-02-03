@@ -46,6 +46,9 @@ export default {
   padding: 15px;
   background: url('../assets/images/potes.jpg') fixed no-repeat top;
   background-size: 100vw;
+  &.isDesktop {
+    min-height: 125px;
+  }
 }
 
 .title {
