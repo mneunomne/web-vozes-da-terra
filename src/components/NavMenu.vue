@@ -5,6 +5,7 @@
       <b-nav-item to="/about" exact>{{ $t('about.title') }}</b-nav-item>
       <b-nav-item to="/audios" exact>{{ $t('audios.title') }}</b-nav-item>
       <b-nav-item to="/contact" exact>{{ $t('contact.title') }}</b-nav-item>
+      <b-nav-item to="/gallery" exact>{{ $t('gallery.title') }}</b-nav-item>
     </b-nav>
   </div>
 </template>
