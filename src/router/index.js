@@ -13,7 +13,6 @@ Vue.use(Router)
 export function createRouter() {
   return new Router({
     linkActiveClass: 'open active',
-    mode: 'history',
     scrollBehavior: () => ({ y: 0 }),
     routes: [
       {
