@@ -125,7 +125,7 @@ const actions = {
     commit('set_data', payload)
   },
   updateJSON({state}, data) {
-    axios.post('http://localhost:3001/audios/', data)
+    axios.post(window.location.origin + ':3001/audios/', data)
     .then(function (res) {
       console.log('success', res)
     })
