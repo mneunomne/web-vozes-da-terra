@@ -1,17 +1,17 @@
 export default {
   home: {
-    title:'Home'
+    title:'./ Sobre'
   },
   about: {
-    title:'Sobre'
+    title:'./ Modelagem'
   },
   audios: {
-    title:'Áudios'
+    title:'./ Áudios'
   },
   gallery: {
-    title:'Galeria'
+    title:'./ Galeria'
   },
   contact: {
-    title:'Contato'
+    title:'./ Contato'
   }
 }

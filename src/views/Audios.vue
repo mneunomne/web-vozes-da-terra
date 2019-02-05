@@ -4,6 +4,7 @@
       <div class="row">
         <h2 class="page-title">{{ $t('audios.title') }}</h2>
       </div>
+      <br/><br/>
       <div class="filter-types">
         <a
           class="tag-name"

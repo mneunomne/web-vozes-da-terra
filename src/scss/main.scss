@@ -14,20 +14,35 @@
 
 * {
   font-family: "Andale Mono";
-  font-size: 12px;
+  font-size: 14px;
 }
 
 a {
   color: black;
 }
 
+p {
+
+  text-align: justify;
+  text-justify: inter-word;
+  width: 900px;
+  line-height: 2;
+}
+
 .nav-item {
   color: black;
   background: white;
-  width: 100%;  
+  width: 100%;
+  font-size: 16px;
+
+  
+
+
+
+
 }
 .nav-link {
-  padding: 0.25rem 0.8rem;
+  padding: 0.45rem 0.8rem;
 }
 
 .row {
@@ -54,7 +69,7 @@ a {
 .tag-name {
   cursor: pointer;
   margin-right: 4px;
-  font-size: 10px;
+  font-size: 14px;
   display: inline-block;
   &:hover {
     color: blue !important;
@@ -63,4 +78,6 @@ a {
     color: blue !important;
     text-decoration: underline !important;
   }
+
+
 }
