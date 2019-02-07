@@ -42,9 +42,9 @@ export default {
 </script>
 <style lang="scss">
 .header {
-  margin-bottom: 4.5em;
-  padding: 50px;
-  background: url('../assets/images/potes_pb3.jpg') fixed no-repeat top;
+  margin-bottom: 3em;
+  padding: 20px;
+  background: url('../assets/images/potes_alta.jpg') fixed no-repeat top;
   background-size: 100vw;
   &.isDesktop {
     min-height: 180px;
@@ -52,9 +52,7 @@ export default {
 }
 
 .title {
-  display: inline-block;
-  
-  
+  display: inline-block; 
 }
 
 .nav-menu {
@@ -62,9 +60,7 @@ export default {
   overflow: hidden;
   height: 0px;
   &.isMenuOpen {
-    height: 200px;
-    padding:8px;
-
+    height: 168px;
   }
 }
 </style>

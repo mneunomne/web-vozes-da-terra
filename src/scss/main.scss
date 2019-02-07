@@ -22,10 +22,6 @@ a {
 }
 
 p {
-
-  text-align: justify;
-  text-justify: inter-word;
-  width: 900px;
   line-height: 2;
 }
 
@@ -33,13 +29,6 @@ p {
   color: black;
   background: white;
   width: 100%;
-  font-size: 16px;
-
-  
-
-
-
-
 }
 .nav-link {
   padding: 0.45rem 0.8rem;
@@ -78,6 +67,4 @@ p {
     color: blue !important;
     text-decoration: underline !important;
   }
-
-
 }
