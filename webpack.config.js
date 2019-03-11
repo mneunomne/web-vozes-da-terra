@@ -15,6 +15,8 @@ const webpackDevServerPort = parseInt(process.env.PORT || '3000', 10)
 const prerender = process.env.NODE_ENV === 'prerender'
 const production = process.env.NODE_ENV === 'production' || prerender
 
+const env = require('dotenv').config()
+
 let postcssPlugins = [
   require('autoprefixer')()
 ]
@@ -120,6 +122,9 @@ module.exports = {
   },
   plugins: [
     new webpack.EnvironmentPlugin(['APP_LOCALE']),
+    new webpack.DefinePlugin({
+      'process.env': env
+    }),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].[chunkhash].css'

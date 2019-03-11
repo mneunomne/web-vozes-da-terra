@@ -92,7 +92,7 @@ export default {
       models: [],
       formData: [],
       payload: {},
-      password: 'vozesdaterrapankararu'
+      password: ''
     }
   },
   computed: {
@@ -161,7 +161,6 @@ export default {
   },
   mounted () {
     this.formData = this.getAudioData
-    console.log('this.formData', this.formData)
   },
   watch: {
     getAudioData (val) {

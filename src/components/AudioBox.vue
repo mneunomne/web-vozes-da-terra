@@ -1,7 +1,10 @@
 <template>
   <transition name="fade" delay="200">
     <div class="audio-box" v-if="!error">
-      <p class="filename">{{ filename }}</p>
+      <p v-if="title" class="title">{{ title }}</p>
+      <p v-else class="filename">{{ filename }}</p>
+      <p v-if="performer" class="performer">{{ performer }}</p>
+      <p v-if="description" class="description">{{ description }}</p>
       <div class="tags">
         <a 
           class="tag-name"
@@ -33,11 +36,19 @@ export default {
   },
   props: {
     filename: {
-      type: String,
-      required: true
+      type: String
+    },
+    performer: {
+      type: String
+    },
+    title: {
+      type: String
     },
     tags: {
       type: Array
+    },
+    description: {
+      type: String
     },
     type: {
       type: String
