@@ -3,7 +3,6 @@
     <h1 class="mb-4">{{ $t('contact.title') }}</h1>
   </div>
 </template>
-
 <script>
 export default {
   name: 'Contact',
