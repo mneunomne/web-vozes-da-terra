@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="mb-4">{{ $t('contact.title') }}</h1>
+    <h3 class="mb-4">{{ $t('contact.title') }}</h3>
   </div>
 </template>
 

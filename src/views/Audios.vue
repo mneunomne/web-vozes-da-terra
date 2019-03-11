@@ -2,7 +2,7 @@
   <div>
     <header class="mb-4">
       <div class="row">
-        <h2 class="page-title">{{ $t('audios.title') }}</h2>
+        <h3 class="page-title">{{ $t('audios.title') }}</h3>
       </div>
       <div class="filter-types">
         <a

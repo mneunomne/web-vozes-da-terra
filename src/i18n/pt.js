@@ -1,6 +1,6 @@
 export default {
   home: {
-    title:'Home'
+    title:'O Projeto'
   },
   about: {
     title:'Sobre'
