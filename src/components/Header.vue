@@ -1,9 +1,9 @@
 <template>
   <div class="header" :class="{ 'isDesktop': !getIsMobile }">
-    <div class="header--content" v-if="getIsMobile">
+    <div class="header--content">
       <div class="title">
         <a @click="isMenuOpen = !isMenuOpen" class="nav-link nav-item">Vozes da Terra</a>
-        <NavMenu class="nav-menu" :class="{'isMenuOpen': isMenuOpen}"></NavMenu>
+        <NavMenu v-if="getIsMobile" class="nav-menu" :class="{'isMenuOpen': isMenuOpen}"></NavMenu>
       </div>
       <div class="lang-button">
         <span @click="$i18n.locale ='en'" :class="{ 'selected': $i18n.locale === 'en' }">en</span>
@@ -47,7 +47,9 @@ export default {
   background: url('../assets/images/potes.jpg') fixed no-repeat top;
   background-size: 100vw;
   &.isDesktop {
-    min-height: 125px;
+    .header--content {
+      padding: 2em;
+    }
   }
 }
 
@@ -60,7 +62,7 @@ export default {
   overflow: hidden;
   height: 0px;
   &.isMenuOpen {
-    height: 120px;
+    height: 135px;
   }
 }
 </style>

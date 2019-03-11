@@ -4,16 +4,11 @@
       <b-container fluid>
         <b-row>
           <b-col class="side-menu" md="2" v-if="!getIsMobile">
-            <a class="nav-link nav-item">Vozes da Terra</a>
             <NavMenu class="nav-menu" :class="{'isMenuOpen': true}"></NavMenu>
           </b-col>
-          <b-col md="10">
+          <b-col md="9">
             <router-view/>
           </b-col>
-          <div class="lang-button" v-if="!getIsMobile">
-            <span @click="$i18n.locale ='en'" :class="{ 'selected': $i18n.locale === 'en' }">en</span>
-            <span @click="$i18n.locale ='pt'" :class="{ 'selected': $i18n.locale === 'pt' }">pt</span>
-          </div>
         </b-row>
       </b-container>
     <Footer></Footer>
@@ -78,5 +73,9 @@ body, html {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.nav-title {
+  font-size: 15px
 }
 </style>
