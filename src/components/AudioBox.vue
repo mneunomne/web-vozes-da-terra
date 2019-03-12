@@ -120,7 +120,6 @@ export default {
 
 .audioplayer {
   padding: 1em;
-  margin-bottom: 1em;
 }
 
 .waveform-box {

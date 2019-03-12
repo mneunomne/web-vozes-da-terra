@@ -24,7 +24,7 @@
         :index="index"
         :type="item.type"
         :id="item.id"
-        :description="'this is a description'"
+        :description="item.description"
         @onTagClick="filterByTag"
       ></AudioBox>
     </div>

@@ -125,7 +125,7 @@ const actions = {
     commit('set_data', payload)
   },
   updateJSON({state}, data) {
-    axios.post(window.location.origin + ':3001/audios/', data)
+    axios.post('http://localhost:3001/audios/', data)
     .then(function (res) {
       console.log('success', res)
     })
@@ -179,6 +179,9 @@ const mutations = {
   },
   set_types (state, payload) {
     state.types = payload
+  },
+  set_description (state, payload) {
+    state.description = payload
   },
   save_file (state) {
     var FileSaver = require('file-saver')
