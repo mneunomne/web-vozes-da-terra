@@ -1,5 +1,5 @@
 <template>
-  <b-col md="9">
+  <b-col :md="getIsMobile ? 12 : 9">
     <div class="row">
       <h3>{{ $t('home.title') }}</h3>
     </div>
@@ -33,9 +33,15 @@
 <script>
 import swal from 'sweetalert2'
 import VueNotifications from 'vue-notifications'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
-  methods: {}
+  methods: {},
+  computed: {
+    ...mapGetters([
+      'getIsMobile'
+    ])
+  }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <b-col md="9">
+  <b-col :md="getIsMobile ? 12 : 9">
     <form class="password" v-if="!isPasswordCorrect">
       Enter password:<br>
       <input type="password" name="password" value="" v-model="password">
@@ -103,7 +103,8 @@ export default {
       'getSomeAudios',
       'getCanEdit',
       'getAudioData',
-      'getTypes'
+      'getTypes',
+      'getIsMobile'
     ])
   },
   methods: {

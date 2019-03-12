@@ -1,5 +1,5 @@
 <template>
-  <b-col md="9">
+  <b-col :md="getIsMobile ? 12 : 9">
     <header class="mb-4">
       <div class="row">
         <h3 class="page-title">{{ $t('audios.title') }}</h3>
@@ -54,7 +54,8 @@ export default {
   computed: {
     ...mapGetters([
       'getAudioData',
-      'getTypes'
+      'getTypes',
+      'getIsMobile'
     ])
   },
   methods: {

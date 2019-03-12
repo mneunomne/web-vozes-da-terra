@@ -1,10 +1,12 @@
 <template>
-  <b-col md="9">
+  <b-col :md="getIsMobile ? 12 : 9">
     <h3 class="mb-4">{{ $t('contact.title') }}</h3>
   </b-col>
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'Contact',
   data() {
@@ -27,6 +29,11 @@ export default {
         'Corn'
       ]
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getIsMobile'
+    ])
   },
   methods: {
     onSubmit(evt) {
