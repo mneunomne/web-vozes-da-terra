@@ -18,6 +18,13 @@ import { createI18n } from './i18n'
 
 import AudioVisual from 'vue-audio-visual'
 
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faPlay, faPause)
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.config.productionTip = false
 

@@ -13,5 +13,7 @@ export default {
   },
   contact: {
     title:'Contato'
-  }
+  },
+  pause: 'pausar',
+  play: 'tocar'
 }

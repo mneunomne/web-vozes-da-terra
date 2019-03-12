@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <b-col md="9">
     <form class="password" v-if="!isPasswordCorrect">
       Enter password:<br>
       <input type="password" name="password" value="" v-model="password">
@@ -69,7 +69,7 @@
         </form>
       </form>
     </div>
-  </div>
+  </b-col>
 </template>
 
 <script>

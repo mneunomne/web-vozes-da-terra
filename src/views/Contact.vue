@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <b-col md="9">
     <h3 class="mb-4">{{ $t('contact.title') }}</h3>
-  </div>
+  </b-col>
 </template>
 
 <script>

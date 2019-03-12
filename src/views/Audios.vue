@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <b-col md="9">
     <header class="mb-4">
       <div class="row">
         <h3 class="page-title">{{ $t('audios.title') }}</h3>
@@ -24,10 +24,11 @@
         :index="index"
         :type="item.type"
         :id="item.id"
+        :description="'this is a description'"
         @onTagClick="filterByTag"
       ></AudioBox>
     </div>
-  </div>
+  </b-col>
 </template>
 
 <script>

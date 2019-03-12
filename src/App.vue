@@ -6,9 +6,7 @@
           <b-col class="side-menu" md="2" v-if="!getIsMobile">
             <NavMenu class="nav-menu" :class="{'isMenuOpen': true}"></NavMenu>
           </b-col>
-          <b-col md="9">
-            <router-view/>
-          </b-col>
+          <router-view/>
         </b-row>
       </b-container>
     <Footer></Footer>

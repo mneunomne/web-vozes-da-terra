@@ -10,9 +10,15 @@
           @click="onTagClick"
         >{{ item }}</a>
       </div>
-      <div :class="{'loading': !isLoaded}" class="waveform-box" :id="'waveform-' + this.id"></div>
-      <div ref="controls" class="controls"></div>
-      <a @click="playPause">{{ getIsPlaying ? 'Pause' : 'Play' }}</a>
+      <div class="audioplayer">
+        <div :class="{'loading': !isLoaded}" class="waveform-box" :id="'waveform-' + this.id"></div>
+        <div ref="controls" class="controls" v-if='isLoaded'>
+          <font-awesome-icon @click="playPause" :icon="getIsPlaying ? 'pause' : 'play'"/>
+          <span>{{ getIsPlaying ? $t('pause') : $t('play') }}</span>
+          <span>{{ currentTime + ' / ' + totalTime }}</span>
+        </div>
+      </div>
+      <p v-if="description" class="description">{{ description }}</p>
     </div>
   </transition>
 </template>
@@ -28,7 +34,9 @@ export default {
       wavesurfer: null,
       error: false,
       status: '',
-      isLoaded: false
+      isLoaded: false,
+      totalTime: '',
+      currentTime: ''
     }
   },
   props: {
@@ -49,6 +57,10 @@ export default {
     id: {
       type: String,
       required: true 
+    },
+    description: {
+      type: String,
+      required: false
     }
   },
   computed: {
@@ -63,11 +75,15 @@ export default {
     },
     onTagClick (evt) {
       this.$emit('onTagClick', evt.target.innerText)
+    },
+    getTimeinMinute (time) {
+      var minutes = Math.floor(time / 60)
+      var seconds = time - minutes * 60
+      return ("0" + minutes).slice(-2) + ':' + ("0" + seconds).slice(-2)
     }
   },
   mounted () {
     this.$nextTick(() => {
-      console.log('WaveSurfer', WaveSurfer, this.$refs)
       this.wavesurfer = WaveSurfer.create({
           container: '#waveform-' + this.id,
           waveColor: 'black',
@@ -80,6 +96,11 @@ export default {
       })
       this.wavesurfer.on('ready',() => {
         this.isLoaded = true
+        this.totalTime = this.getTimeinMinute(this.wavesurfer.getDuration().toFixed(0))
+        this.currentTime = this.getTimeinMinute(this.wavesurfer.getCurrentTime().toFixed(0))
+      })
+      this.wavesurfer.on('audioprocess', () => {
+        this.currentTime = this.getTimeinMinute(this.wavesurfer.getCurrentTime().toFixed(0))
       })
       this.wavesurfer.load('/audios/'+this.filename)
     }) 
@@ -95,6 +116,11 @@ export default {
 
 .filename {
   word-break: break-all;
+}
+
+.audioplayer {
+  padding: 1em;
+  margin-bottom: 1em;
 }
 
 .waveform-box {
