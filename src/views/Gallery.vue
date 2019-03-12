@@ -109,6 +109,10 @@ export default {
 
 .image {
   max-width: 100%;
+  transition: all 0.25s; 
+  &:hover {
+    transform: scale(1.02)
+  }
   p {
     margin-top: 5px;
     font-size: 10px;

@@ -1,8 +1,8 @@
 <template>
   <div class="header" :class="{ 'isDesktop': !getIsMobile }">
     <div class="header--content">
-      <div class="title">
-        <a @click="isMenuOpen = !isMenuOpen" class="nav-link nav-item">Vozes da Terra</a>
+      <div class="nav">
+        <a @click="isMenuOpen = !isMenuOpen" class="nav-link nav-item nav-title">Vozes da Terra</a>
         <NavMenu v-if="getIsMobile" class="nav-menu" :class="{'isMenuOpen': isMenuOpen}"></NavMenu>
       </div>
       <div class="lang-button">
@@ -53,8 +53,12 @@ export default {
   }
 }
 
-.title {
-  display: inline-block;
+.nav {
+  display: inline-block; 
+}
+
+.nav-title {
+  font-size: 1.3em;
 }
 
 .nav-menu {
