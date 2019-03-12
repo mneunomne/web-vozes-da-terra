@@ -29,6 +29,9 @@ a {
 .nav-link {
   padding: 0.25rem 0.8rem;
   font-size: 14px;
+  &.active {
+    text-decoration: underline !important;
+  }
 }
 
 .row {

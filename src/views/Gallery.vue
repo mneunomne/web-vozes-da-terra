@@ -109,6 +109,12 @@ export default {
 
 .image {
   max-width: 100%;
+  p {
+    margin-top: 5px;
+    font-size: 10px;
+    line-height: 1.4em;
+    letter-spacing: -0.2px;
+  }
 }
 
 @media screen and (max-width: 1024px) {
