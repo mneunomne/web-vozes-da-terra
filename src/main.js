@@ -23,6 +23,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 
+import VueJustifiedLayout from 'vue-justified-layout'
+
 library.add(faPlay, faPause)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
@@ -30,6 +32,7 @@ Vue.config.productionTip = false
 
 Vue.use(AudioVisual)
 Vue.use(infiniteScroll)
+Vue.component('vue-justified-layout', VueJustifiedLayout)
 
 export function createApp() {
   const router = createRouter()

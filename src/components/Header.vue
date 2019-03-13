@@ -44,9 +44,12 @@ export default {
 .header {
   margin-bottom: 2em;
   padding: 15px;
-  background: url('../assets/images/potes.jpg') fixed no-repeat top;
-  background-size: 100vw;
+  background: url('../assets/images/terra.jpg') fixed no-repeat top;
+  background-size: auto;
+  background-position-y: -100%;
   &.isDesktop {
+    background-size: 100%; 
+    background-position-y: 0px;
     .header--content {
       padding: 2em;
     }

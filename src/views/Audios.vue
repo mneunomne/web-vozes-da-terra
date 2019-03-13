@@ -3,17 +3,18 @@
     <header class="mb-4">
       <div class="row">
         <h3 class="page-title">{{ $t('audios.title') }}</h3>
+        </br>
+        <div class="filter-types">
+          <a
+            class="tag-name"
+            v-for="type in getTypes"
+            v-bind:key="type[0]"
+            @click="onTypeClick"
+            :class="{'active': currentFilter === type[0]}"
+          >{{ type[0] }}</a>
+        </div>
       </div>
-      <div class="filter-types">
-        <a
-          class="tag-name"
-          v-for="type in getTypes"
-          v-bind:key="type[0]"
-          @click="onTypeClick"
-          :class="{'active': currentFilter === type[0]}"
-        >{{ type[0] }}</a>
-      </div>
-      <h3 v-if="currentFilter !== ''">{{ currentFilter }}</h3>
+      <h4 v-if="currentFilter !== ''">{{ currentFilter }}:</h4>
     </header>
     <div v-infinite-scroll="loadAudios" infinite-scroll-disabled="busy">
       <AudioBox
@@ -109,11 +110,11 @@ export default {
 }
 
 .page-title {
-  display: -webkit-inline-box;
+  width: 100%;
 }
 
 .filter-types {
-  float: right;
+  text-decoration: underline;
   .tag-name {
     font-size: 12px;
   }

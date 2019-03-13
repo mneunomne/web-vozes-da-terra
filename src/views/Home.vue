@@ -1,6 +1,6 @@
 <template>
   <b-col :md="getIsMobile ? 12 : 9">
-    <div class="row">
+    <div class="row page-title">
       <h3>{{ $t('home.title') }}</h3>
     </div>
     <div class="row">

@@ -6,7 +6,7 @@
     <gallery :images="images.map(a => a.src)" :index="index" @close="index = null"></gallery>
     <b-row class="gallery">
       <b-col class="column" md="3" v-for="(col, idx) in 4" :key="idx">
-        <div class="image" 
+        <div class="image-fluid" 
           v-for="(image, imageIndex) in splitArray(images, 4)[idx]"
           :key="imageIndex"
           style="width:100%"
@@ -14,7 +14,7 @@
           <img
             class="image"
             @click="index = image.index"
-            :src="image.src"
+            :src="image.url"
           />
           <p>{{ index === null ? $t(image.description) : '' }}</p>
         </div>
@@ -37,43 +37,81 @@ export default {
       images: [
         {
           index: 0,
-          src: require('../assets/images/foto_1.jpg'),
+          ratio: 1.33333,
+          url: require('../assets/images/foto_1.jpg'),
           description: 'gallery.foto_1'
         },
         {
           index: 1,
-          src: require('../assets/images/foto_2.jpg'),
+          ratio: 1.33333,
+          url: require('../assets/images/foto_2.jpg'),
           description: 'gallery.foto_2'
         },
         {
           index: 2,
-          src: require('../assets/images/foto_3.jpg'),
+          ratio: 1.33333,
+          url: require('../assets/images/foto_3.jpg'),
           description: 'gallery.foto_3'
         },
         {
           index: 3,
-          src: require('../assets/images/foto_4.jpg'),
+          ratio: 1.33333,
+          url: require('../assets/images/foto_4.jpg'),
           description: 'gallery.foto_4'
         },
         {
           index: 4,
-          src: require('../assets/images/foto_5.jpg'),
+          ratio: 1.33333,
+          url: require('../assets/images/foto_5.jpg'),
           description: 'gallery.foto_5'
         },
         {
           index: 5,
-          src: require('../assets/images/foto_6.jpg'),
+          ratio: 0.750334,
+          url: require('../assets/images/foto_6.jpg'),
           description: 'gallery.foto_6'
         },
         {
           index: 6,
-          src: require('../assets/images/foto_7.jpg'),
+          ratio: 0.749644,
+          url: require('../assets/images/foto_7.jpg'),
           description: 'gallery.foto_7'
         },
         {
           index: 7,
-          src: require('../assets/images/foto_8.png'),
+          ratio: 1.7697,
+          url: require('../assets/images/foto_8.png'),
           description: 'gallery.foto_8'
+        },
+        {
+          index: 8,
+          ratio: 1.5,
+          url: require('../assets/images/foto_9.jpg'),
+          description: 'gallery.foto_9'
+        },
+        {
+          index: 9,
+          ratio: 1.77943,
+          url: require('../assets/images/foto_10.jpg'),
+          description: 'gallery.foto_10'
+        },
+        {
+          index: 10,
+          ratio: 1.5,
+          url: require('../assets/images/foto_11.jpg'),
+          description: 'gallery.foto_11'
+        },
+        {
+          index: 11,
+          ratio: 1.5,
+          url: require('../assets/images/foto_12.jpg'),
+          description: 'gallery.foto_12'
+        },
+        {
+          index: 12,
+          ratio: 1.5,
+          url: require('../assets/images/foto_13.jpg'),
+          description: 'gallery.foto_13'
         }
       ],
       index: null
