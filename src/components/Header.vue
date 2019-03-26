@@ -69,7 +69,7 @@ export default {
   overflow: hidden;
   height: 0px;
   &.isMenuOpen {
-    height: 110px;
+    height: 140px;
   }
 }
 </style>

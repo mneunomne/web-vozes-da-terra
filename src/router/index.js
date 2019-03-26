@@ -6,6 +6,7 @@ import Contact from '@/views/Contact'
 import Audios from '@/views/Audios'
 import Edit from '@/views/Edit'
 import Gallery from '@/views/Gallery'
+import Videos from '@/views/Videos'
 
 Vue.use(Router)
 
@@ -38,6 +39,11 @@ export function createRouter() {
         path: '/gallery',
         name: 'gallery',
         component: Gallery
+      },
+      {
+        path: '/videos',
+        name: 'videos',
+        component: Videos
       }
     ]
   })

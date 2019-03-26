@@ -22,6 +22,9 @@ export default {
   contact: {
     title:'Contato'
   },
+  videos: {
+    title: 'Vídeos'
+  },
   pause: 'pausar',
   play: 'tocar'
 }

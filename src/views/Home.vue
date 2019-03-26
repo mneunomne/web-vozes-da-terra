@@ -13,6 +13,9 @@
       <p>Em um orifício modelado na escultura de barro os habitantes da aldeia podem gravar: cânticos tradicionais; reclames sobre suas lutas e resistências por demarcação de terras; histórias da tribo e demais mensagens que valorizem, fortaleçam e empoderem a aldeia. Esse material armazenado na web compõem o banco de sonoridades presente nesta plataforma de acesso público, que tem por objetivo a salvaguarda, difusão, amplificação e transmissão da memória e patrimônio cultural da Aldeia.</p>
       <p>Além da função de guardar e propagar a cultura indígena, este vasilhame de cerâmica, mistura de barro e silício, pode ser usado também como emissor sonoro em performances, e itinerância em diversos espaços. Ao circular por outras Aldeias e espaços urbanos/culturais, a cerâmica leva um pedaço de terras indígenas, preenchida por suas histórias e cultura. A “Voz da Terra” é um projeto open-source, compartilhando saberes, para realização de uma tecnologia cidadã-aldeã.</p>
     </div>
+    <div class="row">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/3UTO2yptevY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
   </b-col>
 </template>
 <script>

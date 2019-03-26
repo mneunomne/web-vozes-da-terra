@@ -22,6 +22,9 @@ export default {
   contact: {
     title:'Contact'
   },
+  videos: {
+    title: 'Videos'
+  },
   pause: 'pause',
   play: 'play'
 }
