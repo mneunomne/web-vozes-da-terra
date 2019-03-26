@@ -9,7 +9,9 @@
           <router-view/>
         </b-row>
       </b-container>
-    <Footer></Footer>
+    <footer class='vdt_footer'>
+      <img src="./assets/images/aei-footer.jpg"/>
+    </footer>
   </div>
 </template>
 
@@ -75,5 +77,15 @@ body, html {
 
 .nav-title {
   font-size: 15px
+}
+
+.vdt_footer {
+  text-align: center;
+  img {
+    text-align: center;
+    margin-top: 50px;
+    width: 100%;
+    max-width: 750px;
+  }
 }
 </style>
