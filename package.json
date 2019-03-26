@@ -4,7 +4,7 @@
   "description": "Lite Vue Frontend boilerplate based on Bootstrap for pure showcase/prototype sites, with Webpack for assets management.",
   "scripts": {
     "dev": "webpack-dev-server --mode development --hot --progress --open --fix",
-    "build": "rimraf dist && cross-env NODE_ENV=production webpack --mode production --progress",
+    "build": "rimraf dist && cross-env NODE_ENV=production webpack --mode production --progress && cp -r audios dist/",
     "prerender": "rimraf dist && cross-env NODE_ENV=prerender webpack --mode production --progress",
     "lint": "eslint --ext .js,.vue src"
   },
