@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header></Header>
-      <b-container fluid>
+      <b-container fluid class="vdt_cont">
         <b-row>
           <b-col class="side-menu" md="2" v-if="!getIsMobile">
             <NavMenu class="nav-menu" :class="{'isMenuOpen': true}"></NavMenu>
@@ -87,5 +87,9 @@ body, html {
     width: 100%;
     max-width: 750px;
   }
+}
+
+.vdt_cont {
+  min-height: calc(100vh - 343px);
 }
 </style>

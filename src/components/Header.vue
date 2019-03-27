@@ -42,7 +42,7 @@ export default {
 </script>
 <style lang="scss">
 .header {
-  margin-bottom: 2em;
+  margin-bottom: 3em;
   padding: 15px;
   background: url('../assets/images/terra.jpg') fixed no-repeat top;
   background-size: auto;
