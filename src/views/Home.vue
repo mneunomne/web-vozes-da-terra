@@ -18,6 +18,7 @@
         <img class="img-fluid" :src="require('../assets/images/foto_1.jpg')"/>
       </b-col>
     </div>
+    <AudioBox v-if="getAudioData.filter((a) => { return a.id === 'aglhi3' })[0].id" :data="getAudioData.filter((a) => { return a.id === 'aglhi3' })[0]"/>
     <div class="row img-section thumb">
       <b-col md="12">
         <img class="img-fluid" :src="require('../assets/images/home/diagrama_dispositivo.jpg')"/>
@@ -26,16 +27,26 @@
   </b-col>
 </template>
 <script>
+
+import AudioBox from '@/components/AudioBox'
 import swal from 'sweetalert2'
 import VueNotifications from 'vue-notifications'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'Home',
-  methods: {},
+  components: {
+    AudioBox
+  },
   computed: {
     ...mapGetters([
-      'getIsMobile'
+      'getIsMobile',
+      'getAudioData'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'fetchAudioById'
     ])
   }
 }

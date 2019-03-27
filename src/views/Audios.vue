@@ -17,14 +17,9 @@
     </header>
     <div v-infinite-scroll="loadAudios" infinite-scroll-disabled="busy">
       <AudioBox
-        v-for="(item, index) in getCurrentAudios()"
+        v-for="item in getCurrentAudios()"
         v-bind:key="item.id"
-        :filename="item.filename"
-        :tags="item.tags"
-        :index="index"
-        :type="item.type"
-        :id="item.id"
-        :description="item.description"
+        :data="item"
         @onTagClick="filterByTag"
       ></AudioBox>
     </div>

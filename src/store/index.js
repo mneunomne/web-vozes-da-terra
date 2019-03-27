@@ -156,6 +156,16 @@ const actions = {
     }
     return response
   },
+  fetchAudioById ({state}, id) {
+    let resp = null
+    let data = state.audioData
+    for (let i in data) {
+      if (data[i].id === id) {
+        resp = data[i]
+      }
+    }
+    return resp
+  },
   setIsMobile ({state}) {
     state.isMobile = window.innerWidth < 845
   },

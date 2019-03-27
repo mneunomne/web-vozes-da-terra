@@ -88,8 +88,4 @@ body, html {
     max-width: 750px;
   }
 }
-
-.vdt_cont {
-  min-height: calc(100vh - 343px);
-}
 </style>

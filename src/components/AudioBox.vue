@@ -1,24 +1,24 @@
 <template>
   <transition name="fade" delay="200">
     <div class="audio-box" v-if="!error">
-      <p class="filename">{{ filename }}</p>
+      <p class="filename">{{ data.filename }}</p>
       <div class="tags">
         <a 
           class="tag-name"
-          v-for="item in tags"
+          v-for="item in data.tags"
           v-bind:key="item"
           @click="onTagClick"
         >{{ item }}</a>
       </div>
       <div class="audioplayer">
-        <div :class="{'loading': !isLoaded}" class="waveform-box" :id="'waveform-' + this.id"></div>
+        <div :class="{'loading': !isLoaded}" class="waveform-box" :id="'waveform-' + data.id"></div>
         <div ref="controls" class="controls" v-if='isLoaded'>
           <font-awesome-icon @click="playPause" :icon="getIsPlaying ? 'pause' : 'play'"/>
           <span>{{ getIsPlaying ? $t('pause') : $t('play') }}</span>
           <span>{{ currentTime + ' / ' + totalTime }}</span>
         </div>
       </div>
-      <p v-if="description" class="description">{{ description }}</p>
+      <p v-if="data.description" class="description">{{ data.description }}</p>
     </div>
   </transition>
 </template>
@@ -40,27 +40,9 @@ export default {
     }
   },
   props: {
-    filename: {
-      type: String,
+    data: {
+      type: Object,
       required: true
-    },
-    tags: {
-      type: Array
-    },
-    type: {
-      type: String
-    },
-    index: {
-      type: Number,
-      required: true
-    },
-    id: {
-      type: String,
-      required: true 
-    },
-    description: {
-      type: String,
-      required: false
     }
   },
   computed: {
@@ -72,6 +54,7 @@ export default {
     playPause () {
       this.wavesurfer.playPause()
       this.status = this.wavesurfer.isPlaying() ? 'playing' : 'paused'
+      this.$root.$emit(this.wavesurfer.isPlaying() ? 'play' : 'pause', this.data.id)
     },
     onTagClick (evt) {
       this.$emit('onTagClick', evt.target.innerText)
@@ -85,7 +68,7 @@ export default {
   mounted () {
     this.$nextTick(() => {
       this.wavesurfer = WaveSurfer.create({
-          container: '#waveform-' + this.id,
+          container: '#waveform-' + this.data.id,
           waveColor: 'black',
           progressColor: 'purple',
           responsive: true,
@@ -102,8 +85,18 @@ export default {
       this.wavesurfer.on('audioprocess', () => {
         this.currentTime = this.getTimeinMinute(this.wavesurfer.getCurrentTime().toFixed(0))
       })
-      this.wavesurfer.load('/audios/'+this.filename)
+      this.wavesurfer.load('/audios/'+this.data.filename)
+
+      this.$root.$on('play', (audio_id) => {
+        if (audio_id !== this.data.id) {
+          this.wavesurfer.pause()
+          this.status = 'paused'
+        }
+      });
     }) 
+  },
+  beforeDestroy () {
+    this.wavesurfer.destroy()
   }
 }
 </script>
