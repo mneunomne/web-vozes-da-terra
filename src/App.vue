@@ -47,9 +47,10 @@ export default {
       this.setIsMobile()
     })
     this.setAudioData()
-    this.setLocalData()
-    this.setTags()
-    this.setTypes()
+    this.setLocalData().then(() => {
+      // this.setTags()
+      this.setTypes()
+    })
   },
   methods: {
     ...mapActions([

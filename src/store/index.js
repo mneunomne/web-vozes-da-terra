@@ -11,6 +11,7 @@ Vue.use(Vuex)
 const state = {
   audioData: [],
   tags: [],
+  types: [],
   canEdit: false,
   isMobile: window.innerWidth < 845
 }
@@ -33,6 +34,9 @@ const getters = {
   },
   getTypes (state) {
     return state.types
+  },
+  getTags (state) {
+    return state.tags
   }
 }
 
@@ -49,7 +53,7 @@ let object_model = {
 }
 
 const actions = {
-  setAudioData ({commit}) {
+  setAudioData ({commit, dispatch}) {
     axios.get(DATA_PATH, {
       headers: {
         'Content-Type': 'application/json'
@@ -66,6 +70,7 @@ const actions = {
       }
       console.log('set_audio_data', payload)
       commit('set_audio_data', payload)
+      dispatch('setTags')
     })
     .catch(function (err) {
       console.log('error', err)
@@ -74,6 +79,7 @@ const actions = {
   setTags ({state, commit}) {
     let payload = []
     let data = state.audioData
+    console.log('data tags', data)
     for (let i in data) {
       let tags = data[i].tags
       for (let j in tags) {
@@ -94,6 +100,7 @@ const actions = {
     payload.sort(function(a, b) {
       return b[1] - a[1];
     });
+    console.log('set tags', payload)
     commit('set_tags', payload)
   },
   setTypes ({commit}) {
@@ -180,6 +187,7 @@ const mutations = {
   },
   set_tags (state, payload) {
     state.tags = payload
+    console.log('type layload', payload)
   },
   set_can_edit (state) {
     state.canEdit = true

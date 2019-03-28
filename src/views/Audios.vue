@@ -6,11 +6,11 @@
         <div class="filter-types">
           <a
             class="tag-name"
-            v-for="type in getTypes"
-            v-bind:key="type[0]"
-            @click="onTypeClick"
-            :class="{'active': currentFilter === type[0]}"
-          >{{ type[0] }}</a>
+            v-for="tag in getTags.filter((_t) => {return _t[1]>0})"
+            v-bind:key="tag[0]"
+            @click="filterByTag(tag[0])"
+            :class="{'active': currentFilter === tag[0]}"
+          >{{ tag[0] }}</a>
         </div>
       </div>
       <h4 v-if="currentFilter !== ''">{{ currentFilter }}:</h4>
@@ -50,6 +50,7 @@ export default {
     ...mapGetters([
       'getAudioData',
       'getTypes',
+      'getTags',
       'getIsMobile'
     ])
   },
@@ -79,18 +80,20 @@ export default {
         this.filteredAudios = resp
       })
     },
-    onTypeClick (evt) {
+    onTagClick (evt) {
       console.log('filter type')
       let type = evt.target.innerText
       this.currentFilter = type
       this.lastAudioIndex = 0
-      this.fetchAudiosByType(type).then(resp => {
+      this.fetchAudiosByTag(tag).then(resp => {
         this.isFiltering = true
         this.filteredAudios = resp
       })
     }
   },
-  mounted () {}
+  mounted () {
+    console.log('types', this.getTypes)
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -105,12 +108,14 @@ export default {
 
 .page-title {
   width: 100%;
+  margin-bottom: 0.5em;
 }
 
 .filter-types {
   text-decoration: underline;
   .tag-name {
     font-size: 12px;
+    text-transform: capitalize;
   }
 }
 </style>
