@@ -1,6 +1,6 @@
 export default {
   home: {
-    title:'O Projeto'
+    title:'O Experimento'
   },
   about: {
     title:'Sobre'
@@ -10,14 +10,14 @@ export default {
   },
   gallery: {
     title:'Galeria',
-    foto_1: 'Isso é uma descrição Isso é uma descrição Isso é uma descrição Isso é uma descrição',
-    foto_2: 'Isso é uma descrição',
-    foto_3: 'Isso é uma descrição',
-    foto_4: 'Isso é uma descrição',
-    foto_5: 'Isso é uma descrição',
-    foto_6: 'Isso é uma descrição',
-    foto_7: 'Isso é uma descrição',
-    foto_8: 'Isso é uma descrição'
+    foto_1: '',
+    foto_2: '',
+    foto_3: '',
+    foto_4: '',
+    foto_5: '',
+    foto_6: '',
+    foto_7: '',
+    foto_8: ''
   },
   contact: {
     title:'Contato'

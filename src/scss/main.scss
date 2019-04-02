@@ -32,16 +32,23 @@ a {
 }
 .nav-link {
   padding: 0.25rem 0.8rem;
-  font-size: 14px;
+  font-size: 13px;
   &.active {
     text-decoration: underline !important;
   }
+}
+
+.img-caption {
+  font-size: 10px
 }
 
 .row {
   margin-right: 0px;
   margin-left: 0px;
   margin-bottom: 1em;
+  &.quote {
+    padding: 2em;
+  }
 }
 
 .lang-button {

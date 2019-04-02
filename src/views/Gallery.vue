@@ -5,10 +5,8 @@
     </div>
     <gallery :images="images.map(a => a.src)" :index="index" @close="index = null"></gallery>
     <b-row class="gallery">
-      <b-col class="column" md="3" v-for="(col, idx) in 4" :key="idx">
-        <div class="image-fluid" 
-          v-for="(image, imageIndex) in splitArray(images, 4)[idx]"
-          :key="imageIndex"
+      <b-col class="column" md="4" :key="imageIndex" v-for="(image, imageIndex) in images">
+        <div class="image-fluid"
           style="width:100%"
         >
           <img
@@ -16,7 +14,7 @@
             @click="index = image.index"
             :src="image.url"
           />
-          <p>{{ index === null ? $t(image.description) : '' }}</p>
+          <p class="img-caption">{{ index === null ? $t(image.description) : '' }}</p>
         </div>
       </b-col>
     </b-row>

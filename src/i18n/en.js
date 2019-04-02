@@ -1,6 +1,6 @@
 export default {
   home: {
-    title:'The Project'
+    title:'The Experiment'
   },
   about: {
     title:'About'
@@ -10,14 +10,14 @@ export default {
   },
   gallery: {
     title:'Gallery',
-    foto_1: 'this is a description',
-    foto_2: 'this is a description',
-    foto_3: 'this is a description',
-    foto_4: 'this is a description',
-    foto_5: 'this is a description',
-    foto_6: 'this is a description',
-    foto_7: 'this is a description',
-    foto_8: 'this is a description'
+    foto_1: '',
+    foto_2: '',
+    foto_3: '',
+    foto_4: '',
+    foto_5: '',
+    foto_6: '',
+    foto_7: '',
+    foto_8: ''
   },
   contact: {
     title:'Contact'
