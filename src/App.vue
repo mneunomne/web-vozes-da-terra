@@ -18,7 +18,6 @@
 <script>
 
 import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import NavMenu from '@/components/NavMenu'
 import Vue from 'vue'
 
@@ -27,7 +26,6 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   components: {
     Header,
-    Footer,
     NavMenu
   },
   name: 'App',
